@@ -28,6 +28,13 @@ class tcinputSettings
             'tc-input-settings'
         );
         add_settings_field(
+            'woocommerce',
+            __('WooCommerce Fatura Bağlantısı', 'wookargo'),
+            array($this, 'woocommerceCallBack'),
+            'tc-input-settings',
+            'defaultSection'
+        );
+        add_settings_field(
             'contactForm7',
             __('Contact Form 7 Bağlantısı', 'wookargo'),
             array($this, 'contactForm7CallBack'),
@@ -54,6 +61,20 @@ class tcinputSettings
         echo '<h3><p>'.__("Bu eklenti ile sitenizde kullandığınız iletişim formu eklentilerinde girilen tc kimlik bilgilerinin doğruluğunu kontrol edebilirsiniz.","tcinput").'<h3></p>';
         echo '<p class="description">'.__("Uyarı: Sadece yüklü olan form eklentileri için aktif edilebilir.","tcinput").'</p>';
     }
+    public function woocommerceCallBack (){
+        ?>
+        <p>
+        <select name="tcSettings[woocommerce]" id="woocommerce" type="text" >
+        <option name="none" value="none" <?php echo $this->tcSettings['woocommerce'] == 'none'  ? 'selected' : ''; ?>><?php _e('Kapalı', 'tcinput');?></option>
+        <option name="standart" value="standart" <?php echo $this->tcSettings['woocommerce'] == 'standart'  ? 'selected' : ''; ?>><?php _e('Format Kontrol', 'tcinput');?></option>
+        <option name="nvi" value="nvi" <?php echo $this->tcSettings['woocommerce'] == 'nvi'  ? 'selected' : ''; ?>><?php _e('NVI Kontrol', 'tcinput');?></option> 
+        </select> <input type="submit" class="button button-primary" value="Ayarı Kaydet"/></p>
+        <p class="description">
+        <input type='checkbox' id='woocommerce' name='tcSettings[woocommerceRequired]' <?php echo ( $this->tcSettings['woocommerceRequired']=='on' ? 'checked':'' ) ?> />
+        <label for='tcSettings[woocommerceRequired]'> Zorunlu Alan Olarak Ekle </label></p>
+        
+    <?php
+    } 
     public function contactForm7CallBack (){
         ?>
         <p class="description">Bu özellik aktif edildiğinde contact form eklentinize tckimlik,tckimlik nvi etiketleri eklenecektir.Bu etiketler ile formlarınıza tc kimlik sorgulama alanları ekleyebilirsiniz.<br>
