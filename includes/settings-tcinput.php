@@ -10,7 +10,7 @@ class tcinputSettings
         $this->tcSettings = get_option('tcSettings');
     } 
     public function addAdminMenu(){
-        add_menu_page('TC INPUT','Tc Input Settings','manage_options','tc-input-settings', array($this,'adminSettingsPage'));
+        add_menu_page('TC INPUT','TC INPUT','manage_options','tc-input-settings', array($this,'adminSettingsPage'));
     }
 
     public function settingsLink($links,$plugin_file){
@@ -52,14 +52,10 @@ class tcinputSettings
     }
     public function defaultSectionCallBack(){
         echo '<h3><p>'.__("Bu eklenti ile sitenizde kullandığınız iletişim formu eklentilerinde girilen tc kimlik bilgilerinin doğruluğunu kontrol edebilirsiniz.","tcinput").'<h3></p>';
-        echo '<p class="description">'.__("Uyarı: Sadece yüklü olan form eklentileri için aktif ediniz.","tcinput").'</p>';
+        echo '<p class="description">'.__("Uyarı: Sadece yüklü olan form eklentileri için aktif edilebilir.","tcinput").'</p>';
     }
     public function contactForm7CallBack (){
         ?>
-        <select name="tcSettings[contactForm7]" id="contactForm7" type="text" >
-        <option name="on" value="on" <?php echo $this->tcSettings['contactForm7'] == 'on'  ? 'selected' : ''; ?>><?php _e('Aktif', 'tcinput');?></option>
-        <option name="off" value="off" <?php echo $this->tcSettings['contactForm7'] == 'off'  ? 'selected' : ''; ?>><?php _e('Pasif', 'tcinput');?></option>
-        </select>
         <p class="description">Bu özellik aktif edildiğinde contact form eklentinize tckimlik,tckimlik nvi etiketleri eklenecektir.Bu etiketler ile formlarınıza tc kimlik sorgulama alanları ekleyebilirsiniz.<br>
         Nvi opsiyonlu etiket seçildiğinde 4 adet giriş bölümü açılacaktır. Ad,Soyad,Doğum Yılı bu alanlara girilen bilgiler nufus müdürlüğü sistemine kayıtlı bilgler ile doğrulanır.<br>
         Her iki etiketide zorunlu kılma seçeneği formu düzenlediğiniz bölümde size sunulmuştur.</p>
@@ -67,21 +63,9 @@ class tcinputSettings
         <?php
     }
     public function ninjaFormCallBack (){
-        ?>
-        <select name="tcSettings[ninjaForm]" id="ninjaForm" type="text"  disabled="true">
-        <option name="on" value="on" <?php echo $this->tcSettings['ninjaForm'] == 'on'  ? 'selected' : ''; ?>><?php _e('Aktif', 'tcinput');?></option>
-        <option name="off" value="off" <?php echo $this->tcSettings['ninjaForm'] == 'off'  ? 'selected' : ''; ?>><?php _e('Pasif', 'tcinput');?></option>
-        </select>
-        <?php
         echo '<p class="description">' . __('Bu seçenek çok yakında aktif edilecektir.', 'tcinput') . '</p>';
     }  
     public function wpFormCallBack (){
-        ?>
-        <select name="tcSettings[wpForms]" id="ninjaForm" type="text"  disabled="true">
-        <option name="on" value="on" <?php echo $this->tcSettings['wpForms'] == 'on'  ? 'selected' : ''; ?>><?php _e('Aktif', 'tcinput');?></option>
-        <option name="off" value="off" <?php echo $this->tcSettings['wpForms'] == 'off'  ? 'selected' : ''; ?>><?php _e('Pasif', 'tcinput');?></option>
-        </select>
-        <?php
         echo '<p class="description">' . __('Bu seçenek çok yakında aktif edilecektir.', 'tcinput') . '</p>';
     }   
     public function adminSettingsPage(){
@@ -89,8 +73,7 @@ class tcinputSettings
         <form method="POST" action="options.php">
         <?php
         settings_fields('tcSettings');
-        do_settings_sections('tc-input-settings');
-        submit_button(__('Ayarlari Kaydet', 'tcinput'));        
+        do_settings_sections('tc-input-settings');                
         ?>
 		</form>
         <?php

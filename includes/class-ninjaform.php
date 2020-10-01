@@ -5,20 +5,19 @@ class ninjaForm
     public function __construct(){
 
         add_filter( 'ninja_forms_submit_data', array($this,'bilgiKontrolNinjaForm'), 10, 2 );
-
     }
 
     public function bilgiKontrolNinjaForm( $form_data ) {
 
         foreach( $form_data[ 'fields' ] as $field ) { 
    
-            if( 'tc_kimlik' == $field[ 'key' ] ) {
+            if( 'tc-no' == $field[ 'key' ] ) {
                 $tc = $field[ 'value' ];
                 if(! standartSorgulama($tc)) {
     
                     $errors = [
                         'fields' => [
-                          'tc_kimlik' => __( 'Hatalı Tc No Formatı', 'tcinput' ),
+                          'tc-no' => __( 'Hatalı Tc No Formatı', 'tcinput' ),
                         ]
                       ];
                     
@@ -34,5 +33,5 @@ class ninjaForm
         } 
 
         return $form_data;
-    }     
+    } 
 }    
