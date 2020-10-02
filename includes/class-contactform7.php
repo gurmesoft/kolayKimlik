@@ -155,7 +155,7 @@ require_once ('functions-kontrol.php');
             $atts['value'] = $value;
         
             if ( wpcf7_support_html5() ) {
-                $atts['type'] = $tag->basetype;
+                $atts['type'] = 'text';
             } else {
                 $atts['type'] = 'text';
             }
@@ -175,11 +175,11 @@ require_once ('functions-kontrol.php');
             if($hasnvi==true &&  $tag->is_required() ==  true){
                 $html = sprintf(
                     '<label>Ad (required)</label><br>
-                    <span class="wpcf7-form-control-wrap nameoftc"><input type="nameoftc" name="nameoftc" value="" size="40" class="wpcf7-form-control wpcf7-nameoftc wpcf7-nameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap"><input type="text" name="nameoftc" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Soyad (required)</label><br>
-                    <span class="wpcf7-form-control-wrap surnameoftc"><input type="surnameoftc" name="surnameoftc" value="" size="40" class="wpcf7-form-control wpcf7-surnameoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap "><input type="text" name="surnameoftc" value="" size="40" class="wpcf7-form-control wpcf7-surnameoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Doğum Yılı (required)</label><br>
-                    <span class="wpcf7-form-control-wrap yearoftc"><input type="yearoftc" maxlength="4" name="yearoftc" value="" size="40"  class="wpcf7-form-control wpcf7-yearoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap "><input type="text" maxlength="4" name="yearoftc" value="" size="40"  class="wpcf7-form-control wpcf7-yearoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Tc Kimlik Numarası(required)</label><br>
                     <span class="wpcf7-form-control-wrap %1$s"><input %2$s />%3$s</span><br>'
                     ,sanitize_html_class( $tag->name ), $atts, $validation_error
@@ -188,11 +188,11 @@ require_once ('functions-kontrol.php');
             }else if($hasnvi==true &&  $tag->is_required() == false){
                 $html = sprintf(
                     '<label>Ad</label><br>
-                    <span class="wpcf7-form-control-wrap nameoftc"><input type="nameoftc" name="nameoftc" value="" size="40" class="wpcf7-form-control wpcf7-nameoftc wpcf7-nameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap"><input type="text" name="nameoftc" value="" size="40" class="wpcf7-form-control  wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Soyad</label><br>
-                    <span class="wpcf7-form-control-wrap surnameoftc"><input type="surnameoftc" name="surnameoftc" value="" size="40" class="wpcf7-form-control wpcf7-surnameoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap "><input type="text" name="surnameoftc" value="" size="40" class="wpcf7-form-control wpcf7-surnameoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Doğum Yılı</label><br>
-                    <span class="wpcf7-form-control-wrap yearoftc"><input type="yearoftc" maxlength="4" name="yearoftc" value="" size="40"  class="wpcf7-form-control wpcf7-yearoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap "><input type="text" maxlength="4" name="yearoftc" value="" size="40"  class="wpcf7-form-control wpcf7-yearoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Tc Kimlik Numarası</label><br>
                     <span class="wpcf7-form-control-wrap %1$s"><input %2$s />%3$s</span><br>'
                     ,sanitize_html_class( $tag->name ), $atts, $validation_error
