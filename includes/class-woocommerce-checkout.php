@@ -19,8 +19,12 @@ class wooCheckOut{
                 $customError = '<strong>Fatura TC Kimlik Numarasi</strong> gerekli bir alandır.';					
                 $errors->add( 'validation', $customError );
             } 
+            if (! is_numeric($_POST['billing_tckimlik']) ){
+                $customError = '<strong>Fatura TC Kimlik Numarasi</strong> sadece rakam içerebilir.';					
+                $errors->add( 'validation', $customError );
+            } 
             if (! standartSorgulama($_POST['billing_tckimlik']) && ! empty($_POST['billing_tckimlik'])){
-                $customError = '<strong>Fatura TC Kimlik Numarasi</strong> uyumsuz formattadir';					
+                $customError = '<strong>Fatura TC Kimlik Numarasi</strong> uyumsuz formattadir.';					
                 $errors->add( 'validation', $customError );
             }
         }else if($this->tcSettings['woocommerce']=='nvi' && $this->tcSettings['woocommerceRequired']=='on' ){
@@ -35,9 +39,13 @@ class wooCheckOut{
                 $errors->add( 'validation', $customError );
             }    
             if (empty($_POST['billing_dogumYili']) ){
-                $customError = '<strong>Fatura Doğum Yılı</strong> gerekli bir alandır.';					
+                $customError = '<strong>Fatura Fatura Doğum Yılı</strong> gerekli bir alandır.';					
                 $errors->add( 'validation', $customError );
             }
+            if (! is_numeric($_POST['billing_tckimlik']) OR ! is_numeric($_POST['billing_dogumYili']) ){
+                $customError = '<strong>Fatura  TC Kimlik Numarasi ve Doğum Yılı</strong> sadece rakam içerebilir.';					
+                $errors->add( 'validation', $customError );
+            } 
             if (nviSorgulama($data)=='false'){
                 $customError = '<strong>Fatura Kimlik Bilgileri Uyumsuz!</strong>';					
                 $errors->add( 'validation', $customError );

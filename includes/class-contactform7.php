@@ -26,7 +26,7 @@ require_once ('functions-kontrol.php');
                     $hasnvi = true;
                 }
             } 
-            if($hasnvi== true){
+            if($hasnvi == true){
                 $data=array();
                 $name = $tag->name;
                 $tc = isset( $_POST[$name] ) ? trim( wp_unslash( strtr( (string) $_POST[$name], "\n", " " ) ) ) : '';
@@ -39,7 +39,8 @@ require_once ('functions-kontrol.php');
                 $data['dogumyili']=$yearOfTC;
         
                 if ( 'tckimlik' == $tag->basetype ) { 
-                    if ( $tag->is_required() and '' === $tc ) {
+
+                    if ($tag->is_required() and '' === $tc) {
                         $result->invalidate( $tag, wpcf7_get_message( 'invalid_required' ) );
                     }
                     if(standartSorgulama($tc) == false ){
@@ -54,6 +55,9 @@ require_once ('functions-kontrol.php');
                     }
                     if(empty($yearOfTC)){
                         $result->invalidate( $tag, wpcf7_get_message( 'invalid_year' ) );
+                    }
+                    if(! is_numeric($tc) OR ! is_numeric($yearOfTC)){
+                        $result->invalidate( $tag, wpcf7_get_message( 'invalid_value' ) );
                     }
                     if(nviSorgulama($data) == 'false'){
                         $result->invalidate( $tag, wpcf7_get_message( 'invalid_data' ) );
@@ -70,8 +74,10 @@ require_once ('functions-kontrol.php');
                     if ( $tag->is_required() and '' === $tc ) {
                         $result->invalidate( $tag, wpcf7_get_message( 'invalid_required' ) );
                     }
-                    if(standartSorgulama($tc) == false ){
-    
+                    if (! is_numeric($tc)) {
+                        $result->invalidate( $tag, wpcf7_get_message( 'invalid_value' ) );
+                    }
+                    if(standartSorgulama($tc) == false ){    
                         $result->invalidate( $tag, wpcf7_get_message( 'invalid_tc' ));
                     }
                 }
@@ -111,6 +117,12 @@ require_once ('functions-kontrol.php');
                         __( "Girilen Bilgiler Uyumsuz.", 'tcinput' ),
                     'default' =>
                         __( "Girilen Bilgiler Uyumsuz.", 'tcinput' ),
+                ),
+                'invalid_value' => array(
+                    'description' =>
+                        __( "Yıl ve TC Kimlik Bilgileri Sadece Rakam İçerebilir.", 'tcinput' ),
+                    'default' =>
+                        __( "Yıl ve TC Kimlik Bilgileri Sadece Rakam İçerebilir.", 'tcinput' ),
                 )
             ));
           return $messages;
@@ -179,7 +191,7 @@ require_once ('functions-kontrol.php');
                     <label> Soyad (required)</label><br>
                     <span class="wpcf7-form-control-wrap "><input type="text" name="surnameoftc" value="" size="40" class="wpcf7-form-control wpcf7-surnameoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Doğum Yılı (required)</label><br>
-                    <span class="wpcf7-form-control-wrap "><input type="text" maxlength="4" name="yearoftc" value="" size="40"  class="wpcf7-form-control wpcf7-yearoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap "><input type="text"  maxlength="4" name="yearoftc" value="" size="40"  class="wpcf7-form-control wpcf7-yearoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Tc Kimlik Numarası(required)</label><br>
                     <span class="wpcf7-form-control-wrap %1$s"><input %2$s />%3$s</span><br>'
                     ,sanitize_html_class( $tag->name ), $atts, $validation_error
