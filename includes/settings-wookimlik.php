@@ -10,12 +10,12 @@ class tcinputSettings
         $this->tcSettings = get_option('tcSettings');
     } 
     public function addAdminMenu(){
-        add_menu_page('TC INPUT','TC INPUT','manage_options','tc-input-settings', array($this,'adminSettingsPage'));
+        add_menu_page('wooKimlik','wooKimlik','manage_options','wookimlik-settings', array($this,'adminSettingsPage'));
     }
 
     public function settingsLink($links,$plugin_file){
-        if($plugin_file=="tcinput/tcinput.php"){
-            $links[]="<a href='".admin_url("admin.php?page=tc-input-settings")."'>Settings</a>";
+        if($plugin_file=="wookimlik/wookimlik.php"){
+            $links[]="<a href='".admin_url("admin.php?page=wookimlik-settings")."'>Ayarlar</a>";
         }
         return $links;
     }
@@ -23,43 +23,43 @@ class tcinputSettings
     public function getOptionPage(){        
         add_settings_section(
             'defaultSection',
-            __('<h1>TC INPUT</h1>', 'wookargo'),
+            __('<h1>wooKimlik</h1>', 'wookargo'),
             array($this, 'defaultSectionCallBack'),
-            'tc-input-settings'
+            'wookimlik-settings'
         );  
             add_settings_field(
             'header',
             __('Etki Alanları<hr>', 'wookargo'),
             array($this,'headerCb'),
-            'tc-input-settings',
+            'wookimlik-settings',
             'defaultSection'
         );
             add_settings_field(
             'woocommerce',
             __('WooCommerce Ödeme Sayfası', 'wookargo'),
             array($this, 'woocommerceCallBack'),
-            'tc-input-settings',
+            'wookimlik-settings',
             'defaultSection'
         );
         add_settings_field(
             'contactForm7',
             __('Contact Form 7', 'wookargo'),
             array($this, 'contactForm7CallBack'),
-            'tc-input-settings',
+            'wookimlik-settings',
             'defaultSection'
         );
         add_settings_field(
             'ninjaForm',
             __('Ninja Form', 'wookargo'),
             array($this, 'ninjaFormCallBack'),
-            'tc-input-settings',
+            'wookimlik-settings',
             'defaultSection'
         );
         add_settings_field(
             'wpForms',
             __('WPForms', 'wookargo'),
             array($this, 'wpFormCallBack'),
-            'tc-input-settings',
+            'wookimlik-settings',
             'defaultSection'
         );
         register_setting('tcSettings', 'tcSettings', array($this, 'emptyCallBack'));
@@ -111,7 +111,7 @@ class tcinputSettings
         <form method="POST" action="options.php">
         <?php
         settings_fields('tcSettings');
-        do_settings_sections('tc-input-settings');                
+        do_settings_sections('wookimlik-settings');                
         ?>
 		</form>
         <?php
