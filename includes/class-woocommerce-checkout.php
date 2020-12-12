@@ -5,7 +5,14 @@ class wooCheckOut{
     public function __construct(){
         $this->tcSettings = get_option('tcSettings');
         add_filter('woocommerce_checkout_fields' , array($this,'yeniAlanlarEkle'));       
-        add_action('woocommerce_after_checkout_validation', array($this,'hataEkle'), 10, 2);       
+        add_action('woocommerce_after_checkout_validation', array($this,'hataEkle'), 10, 2);
+        add_action( 'woocommerce_admin_order_data_after_billing_address',array($this,"siparisFaturaBilgileri"));
+    }
+    function siparisFaturaBilgileri($siparis){
+        $musteri = $siparis->get_customer_id();
+        echo '<div class="address"><p><strong>TC Kimlik No:</strong> '. get_user_meta($musteri,'billing_tckimlik',true).'</p>';
+        echo '<p><strong>Vergi Dairesi:</strong> '. get_user_meta($musteri,'billing_vergiDairesi',true).'</p>';
+        echo '<p><strong>Vergi No:</strong> '. get_user_meta($musteri,'billing_vergiNo',true).'</p></div>';
     }
     function yeniAlanlarEkle($alanlar) {
         $alanlar['billing']['billing_tckimlik'] = array(
@@ -26,8 +33,25 @@ class wooCheckOut{
                 'placeholder' => __(''),
                 'priority' => 22
             );
-        }     
-        
+        }
+        if ($this->tcSettings["woocommerceVergi"] == "on") {
+            $alanlar['billing']['billing_vergiDairesi'] = array(
+                'type' => 'text',
+                'required' => ($this->tcSettings['woocommerceRequiredVergi'] == 'on' ? true : false),
+                'class' => array('my-field-class form-row-first'),
+                'label' => __('Vergi Dairesi', 'tcinput'),
+                'placeholder' => __(''),
+                'priority' => 23
+            );
+            $alanlar['billing']['billing_vergiNo'] = array(
+                'type' => 'text',
+                'required' => ($this->tcSettings['woocommerceRequiredVergi'] == 'on' ? true : false),
+                'class' => array('my-field-class form-row-last'),
+                'label' => __('Vergi No', 'tcinput'),
+                'placeholder' => __(''),
+                'priority' => 24
+            );
+        }
         return $alanlar;
     }
     function hataEkle( $fields, $errors ){        
@@ -69,6 +93,24 @@ class wooCheckOut{
             }
         }else if($this->tcSettings['woocommerce']=='standart' && $this->tcSettings['woocommerceRequired']== null ){
             //Otomatik doldurma secenegi eklenebilir
+        }
+        if ($this->tcSettings["woocommerceVergi"]== "on" and $this->tcSettings["woocommerceRequiredVergi"]== "on"){
+            if(empty($_POST['billing_vergiDairesi'])){
+                $hataMesaji = '<strong>Fatura Vergi Dairesi</strong> gerekli bir alandır.';
+                $errors->add( 'validation', $hataMesaji );
+            }
+            if(empty($_POST['billing_vergiNo'])) {
+                $hataMesaji = '<strong>Fatura Vergi No</strong> gerekli bir alandır.';
+                $errors->add('validation', $hataMesaji);
+            }
+            if(!is_numeric($_POST['billing_vergiNo'])) {
+                $hataMesaji = '<strong>Fatura Vergi No</strong> sadece rakam içermelidir.';
+                $errors->add('validation', $hataMesaji);
+            }
+            if(strlen($_POST['billing_vergiNo'])!=10) {
+                $hataMesaji = '<strong>Fatura Vergi No</strong> 10 haneli olmalıdır.';
+                $errors->add('validation', $hataMesaji);
+            }
         }
     }
 }

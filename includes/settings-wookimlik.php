@@ -88,8 +88,12 @@ class tcinputSettings
         Her iki kontrolü de "Zorunlu Alan Olarak Ekle" seçeneği ile isteğe bağlı bırakabilir yada zorunlu kılabilirsiniz. </p>
         <p>
         <p> <img src="<?php echo plugin_dir_url(__DIR__)?>assets/woocommerce.png"></p>
+        <input type='checkbox' id='woocommerceVergi' name='tcSettings[woocommerceVergi]' <?php echo ( $this->tcSettings['woocommerceVergi']=='on' ? 'checked':'' ) ?> />
+        <label for='tcSettings[woocommerceRequired]'> Vergi Dairesi/No Alanı Ekle </label></p>
+        <input type='checkbox' id='woocommerceRequiredVergiAlani' name='tcSettings[woocommerceRequiredVergi]' <?php echo ( $this->tcSettings['woocommerceRequiredVergi']=='on' ? 'checked':'' ) ?> />
+        <label for='tcSettings[woocommerceRequired]'>Zorunlu Alan Olarak Ekle </label></p>
+        <p> <img style="width: 400px; height: 60px;"src="<?php echo plugin_dir_url(__DIR__)?>assets/woocommerceVergi.png"></p>
         <hr>
-        
     <?php
     } 
     public function contactForm7CallBack (){
