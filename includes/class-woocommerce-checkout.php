@@ -4,6 +4,9 @@ class wooCheckOut{
 
     public function __construct(){
         $this->tcSettings = get_option('tcSettings');
+        if($this->tcSettings['woocommerce']=='none'){
+            return;
+        }
         add_filter('woocommerce_checkout_fields' , array($this,'yeniAlanlarEkle'));       
         add_action('woocommerce_after_checkout_validation', array($this,'hataEkle'), 10, 2);       
     }
