@@ -10,7 +10,8 @@ class tcinputSettings
         $this->tcSettings = get_option('tcSettings');
     } 
     public function addAdminMenu(){
-        add_menu_page('wooKimlik','wooKimlik','manage_options','wookimlik-settings', array($this,'adminSettingsPage'));
+        add_menu_page('wooKimlik','wooKimlik','manage_options','wookimlik-settings');
+        add_submenu_page('wookimlik-settings', 'wooKimlik','wooKimlik','manage_options','wookimlik-settings', array($this,'adminSettingsPage'));
     }
 
     public function settingsLink($links,$plugin_file){

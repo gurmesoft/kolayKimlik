@@ -1,12 +1,20 @@
 <?php
-/**
+/*
  * Plugin Name: wooKimlik
  * Plugin URI: https://www.gurmewoo.com/
  * Description:
- * Version: 1.0.0
+ * Version: 1.2.0
  * Author: GurmeWoo.com
  * Author URI: https://www.gurmewoo.com
- */
+ * Plugin URI: https://gurmewoo.com/product/wookimlik-wordpress-woocommerce-kimlik-ve-vergi-numarasi-kontrol-eklentisi
+ * Text Domain: WOOKIMLIK
+ * WC requires at least: 4.9
+ * WC tested up to: 5.6
+ * JIRAPROJECT: TI
+ * JIRABOARDID: 14
+ * ID: WOOKIMLIK
+*/
+
 require_once 'includes/settings-wookimlik.php';
 require_once 'includes/class-contactform7.php';
 require_once 'includes/class-ninjaform.php';
@@ -32,6 +40,7 @@ if(class_exists("WPCF7")){
 
 
 
-
+require_once 'includes/wookimlik-otomatik-guncelleme.php';
+require_once 'includes/wookimlik-lisans.php';
 
 
