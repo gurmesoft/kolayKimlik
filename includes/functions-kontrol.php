@@ -58,4 +58,34 @@
         return true;
 	}
 
+	 function vergiKontrol($taxNumber){
+    	if (strlen($taxNumber) !== 10) {
+    	    return false;
+    	}
+
+    	$total = 0;
+    	$checkNum = null;		
+    	for ($i = 0; $i < 9; $i++) {
+    	    $tmp1 = ($taxNumber[$i] + (9 - $i)) % 10;
+    	    $tmp2 = ($tmp1 * (2 ** (9 - $i))) % 9;
+
+    	    if ($tmp1 !== 0 && $tmp2 === 0) {
+    	        $tmp2 = 9;
+    	    }
+
+    	    $total += $tmp2;
+    	}
+
+    	if ($total % 10 === 0) {
+    	    $checkNum = 0;
+    	} else {
+    	    $checkNum = 10 - ($total % 10);
+    	}
+
+    	if ((int)$taxNumber[9] !== $checkNum) {
+    	    return false;
+    	}
+
+    	return true;
+	}
 ?>

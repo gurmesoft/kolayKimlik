@@ -4,12 +4,12 @@ class wooCheckOut{
 
     public function __construct(){
         $this->tcSettings = get_option('tcSettings');
-        if($this->tcSettings['woocommerce']=='none'){
-            return;
+        if(isset($this->tcSettings['enabled'])){
+            add_filter('woocommerce_checkout_fields' , array($this,'yeniAlanlarEkle'));       
+            add_action('woocommerce_after_checkout_validation', array($this,'hataEkle'), 10, 2);
+            add_action( 'woocommerce_admin_order_data_after_billing_address',array($this,"siparisFaturaBilgileri"));
         }
-        add_filter('woocommerce_checkout_fields' , array($this,'yeniAlanlarEkle'));       
-        add_action('woocommerce_after_checkout_validation', array($this,'hataEkle'), 10, 2);
-        add_action( 'woocommerce_admin_order_data_after_billing_address',array($this,"siparisFaturaBilgileri"));
+
     }
     function siparisFaturaBilgileri($siparis){
         $musteri = $siparis->get_customer_id();
@@ -17,26 +17,29 @@ class wooCheckOut{
         echo '<p><strong>Vergi Dairesi:</strong> '. get_user_meta($musteri,'billing_vergiDairesi',true).'</p>';
         echo '<p><strong>Vergi No:</strong> '. get_user_meta($musteri,'billing_vergiNo',true).'</p></div>';
     }
-    function yeniAlanlarEkle($alanlar) {
-        $alanlar['billing']['billing_tckimlik'] = array(
-            'type' => 'text',            
-            'required'=> ( $this->tcSettings['woocommerceRequired']=='on' ? true : false ),            
-            'class' =>( $this->tcSettings['woocommerce']=='standart' ? array('my-field-class form-row-wide') : array('my-field-class form-row-first')) , 
-            'label' => __('TC Kimlik No','tcinput'),
-            'placeholder' => __(''),
-            'priority' => 21
-        );
-        if($this->tcSettings['woocommerce']=='nvi'){
-            $alanlar['billing']['billing_dogumYili']=array(
-                'type' => 'text',
-                'maxlength' => 4,
-                'required'=> ( $this->tcSettings['woocommerceRequired']=='on' ? true : false ),             
-                'class' => array('my-field-class form-row-last'),         
-                'label' => __('Doğum Yılı','tcinput'),
+    function yeniAlanlarEkle($alanlar){
+        if($this->tcSettings['woocommerce'] != 'none'){
+            $alanlar['billing']['billing_tckimlik'] = array(
+                'type' => 'text',            
+                'required'=> ( $this->tcSettings['woocommerceRequired']=='on' ? true : false ),            
+                'class' =>( $this->tcSettings['woocommerce']=='standart' ? array('my-field-class form-row-wide') : array('my-field-class form-row-first')) , 
+                'label' => __('TC Kimlik No','tcinput'),
                 'placeholder' => __(''),
-                'priority' => 22
+                'priority' => 21
             );
+            if($this->tcSettings['woocommerce']=='nvi'){
+                $alanlar['billing']['billing_dogumYili']=array(
+                    'type' => 'text',
+                    'maxlength' => 4,
+                    'required'=> ( $this->tcSettings['woocommerceRequired']=='on' ? true : false ),             
+                    'class' => array('my-field-class form-row-last'),         
+                    'label' => __('Doğum Yılı','tcinput'),
+                    'placeholder' => __(''),
+                    'priority' => 22
+                );
+            }
         }
+
         if ($this->tcSettings["woocommerceVergi"] == "on") {
             $alanlar['billing']['billing_vergiDairesi'] = array(
                 'type' => 'text',
@@ -113,6 +116,10 @@ class wooCheckOut{
             if(strlen($_POST['billing_vergiNo'])!=10) {
                 $hataMesaji = '<strong>Fatura Vergi No</strong> 10 haneli olmalıdır.';
                 $errors->add('validation', $hataMesaji);
+            }
+            if(vergiKontrol($_POST['billing_vergiNo'])){
+                $customError = '<strong>Vergi Numarası</strong> geçersizdir.';					
+                $errors->add( 'validation', $customError );
             }
         }
     }

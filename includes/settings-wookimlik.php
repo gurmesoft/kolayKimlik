@@ -24,41 +24,48 @@ class tcinputSettings
     public function getOptionPage(){        
         add_settings_section(
             'defaultSection',
-            __('<h1>wooKimlik</h1>', 'wookargo'),
+            __('<h1>wooKimlik</h1>', 'wookimlik'),
             array($this, 'defaultSectionCallBack'),
             'wookimlik-settings'
         );  
             add_settings_field(
             'header',
-            __('Etki Alanları<hr>', 'wookargo'),
+            __('Etki Alanları<hr>', 'wookimlik'),
             array($this,'headerCb'),
+            'wookimlik-settings',
+            'defaultSection'
+        );
+        add_settings_field(
+            'woocommerce_enable',
+            __('Aktif Et', 'wookimlik'),
+            array($this, 'woocommerceEnable'),
             'wookimlik-settings',
             'defaultSection'
         );
             add_settings_field(
             'woocommerce',
-            __('WooCommerce Ödeme Sayfası', 'wookargo'),
+            __('WooCommerce Ödeme Sayfası', 'wookimlik'),
             array($this, 'woocommerceCallBack'),
             'wookimlik-settings',
             'defaultSection'
         );
         add_settings_field(
             'contactForm7',
-            __('Contact Form 7', 'wookargo'),
+            __('Contact Form 7', 'wookimlik'),
             array($this, 'contactForm7CallBack'),
             'wookimlik-settings',
             'defaultSection'
         );
         add_settings_field(
             'ninjaForm',
-            __('Ninja Form', 'wookargo'),
+            __('Ninja Form', 'wookimlik'),
             array($this, 'ninjaFormCallBack'),
             'wookimlik-settings',
             'defaultSection'
         );
         add_settings_field(
             'wpForms',
-            __('WPForms', 'wookargo'),
+            __('WPForms', 'wookimlik'),
             array($this, 'wpFormCallBack'),
             'wookimlik-settings',
             'defaultSection'
@@ -73,14 +80,19 @@ class tcinputSettings
         echo '<p>'.__("Nasıl Kullanırım ?","tcinput").'</p><hr>';
 
     }
+    public function woocommerceEnable(){
+        ?>
+            <input type='checkbox' id='woocommerce' name='tcSettings[enabled]' <?php echo ( $this->tcSettings['enabled']=='on' ? 'checked':'' ) ?> />
+        <?php
+    }
     public function woocommerceCallBack (){
         ?>
         <p>
-        <select name="tcSettings[woocommerce]" id="woocommerce" type="text" >
+        <select name="tcSettings[woocommerce]" id="woocommerce">
         <option name="none" value="none" <?php echo $this->tcSettings['woocommerce'] == 'none'  ? 'selected' : ''; ?>><?php _e('Kapalı', 'tcinput');?></option>
         <option name="standart" value="standart" <?php echo $this->tcSettings['woocommerce'] == 'standart'  ? 'selected' : ''; ?>><?php _e('Format Kontrol', 'tcinput');?></option>
         <option name="nvi" value="nvi" <?php echo $this->tcSettings['woocommerce'] == 'nvi'  ? 'selected' : ''; ?>><?php _e('NVI Kontrol', 'tcinput');?></option> 
-        </select> <input type="submit" class="button button-primary" value="Ayarı Kaydet"/></p>
+        </select></p>
         <p class="description">
         <input type='checkbox' id='woocommerce' name='tcSettings[woocommerceRequired]' <?php echo ( $this->tcSettings['woocommerceRequired']=='on' ? 'checked':'' ) ?> />
         <label for='tcSettings[woocommerceRequired]'> Zorunlu Alan Olarak Ekle </label></p>
@@ -95,6 +107,7 @@ class tcinputSettings
         <label for='tcSettings[woocommerceRequired]'>Zorunlu Alan Olarak Ekle </label></p>
         <p> <img style="width: 400px; height: 60px;"src="<?php echo plugin_dir_url(__DIR__)?>assets/woocommerceVergi.png"></p>
         <hr>
+        <input type="submit" class="button button-primary" value="Ayarı Kaydet"/>
     <?php
     } 
     public function contactForm7CallBack (){
