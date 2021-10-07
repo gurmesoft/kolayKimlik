@@ -37,10 +37,3 @@ if(class_exists("WPCF7")){
 // if(class_exists("Ninja_Forms")){
 //     $NinjaForm = new ninjaForm();  
 // }
-
-
-
-require_once 'includes/wookimlik-otomatik-guncelleme.php';
-require_once 'includes/wookimlik-lisans.php';
-
-
