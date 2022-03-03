@@ -23,9 +23,9 @@ Bunlara ek olarak sadece TC Kimlik numarasını matematiksel işlemler ile  kont
 * TC Kimlik numaralarını matematiksel işlemlere göre ek olarak kontrol eder.
 * TC Kimlik numaralarını ad, soy ad ve doğum tarihi bilgileri ile NVİ API’si üzerinden doğrular ve %100 doğruluk sağlar.
 * İsteğe bağlı şekilde WooCommerce Ödeme Formu içerisinde çalışabilir.
-* Contact Form eklentisi içerisinde özelleştirilmiş formlar oluştururken kullanılabilir.
-* Ninja Forms eklentisi içerisinde özelleştirilmiş formlar oluştururken kullanılabilir.
-* WPForms eklentisi içerisinde özelleştirilmiş formlar oluştururken kullanılabilir.
+* [Contact Form](https://tr.wordpress.org/plugins/contact-form-7/) eklentisi içerisinde özelleştirilmiş formlar oluştururken kullanılabilir.
+* [Ninja Forms](https://tr.wordpress.org/plugins/ninja-forms/) eklentisi içerisinde özelleştirilmiş formlar oluştururken kullanılabilir.
+* [WPForms](https://tr.wordpress.org/plugins/wpforms-lite/) eklentisi içerisinde özelleştirilmiş formlar oluştururken kullanılabilir.
 * Kolay Kimlik alınan bilgileri veri tabanınızda kendisine özel alanlarda saklar.
 * Kolay Kimlik diğer dillere kolayca çevrilebilecek şekilde kodlanmıştır. Hali hazırda Türkçe dil desteği olduğu gibi, diğer dillere de çevrilebilmektedir.
 * Form alanlarındaki mesaj kısımlarını dilerseniz özelleştirebilirsiniz.
