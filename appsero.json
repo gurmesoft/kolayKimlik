@@ -1,0 +1,18 @@
+{
+    "exclude": [
+        ".github",
+        ".git",
+        "appsero.json",
+        "composer.json",
+        "composer.lock",
+        ".gitignore",
+        "src",
+        "node_modules",
+        "package-lock.json",
+        "sonar-project.properties",
+        "TODO",
+        "webpack.config.js",
+        "yarn-error.log",
+        "yarn.lock"
+    ]
+}

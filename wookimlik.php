@@ -3,7 +3,7 @@
  * Plugin Name: wooKimlik
  * Plugin URI: https://www.gurmewoo.com/
  * Description:
- * Version: 1.2.1
+ * Version: 1.2.2
  * Author: GurmeWoo.com
  * Author URI: https://www.gurmewoo.com
  * Plugin URI: https://gurmewoo.com/product/wookimlik-wordpress-woocommerce-kimlik-ve-vergi-numarasi-kontrol-eklentisi
