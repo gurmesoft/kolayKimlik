@@ -10,13 +10,13 @@ class tcinputSettings
         $this->tcSettings = get_option('tcSettings');
     } 
     public function addAdminMenu(){
-        add_menu_page('wooKimlik','wooKimlik','manage_options','wookimlik-settings');
-        add_submenu_page('wookimlik-settings', 'wooKimlik','wooKimlik','manage_options','wookimlik-settings', array($this,'adminSettingsPage'));
+        add_menu_page('kolayKimlik','kolayKimlik','manage_options','kolaykimlik-settings');
+        add_submenu_page('kolaykimlik-settings', 'kolayKimlik','kolayKimlik','manage_options','kolaykimlik-settings', array($this,'adminSettingsPage'));
     }
 
     public function settingsLink($links,$plugin_file){
-        if($plugin_file=="wookimlik/wookimlik.php"){
-            $links[]="<a href='".admin_url("admin.php?page=wookimlik-settings")."'>Ayarlar</a>";
+        if($plugin_file=="kolaykimlik/kolaykimlik.php"){
+            $links[]="<a href='".admin_url("admin.php?page=kolaykimlik-settings")."'>Ayarlar</a>";
         }
         return $links;
     }
@@ -24,50 +24,50 @@ class tcinputSettings
     public function getOptionPage(){        
         add_settings_section(
             'defaultSection',
-            __('<h1>wooKimlik</h1>', 'wookimlik'),
+            __('<h1>kolayKimlik</h1>', 'kolaykimlik'),
             array($this, 'defaultSectionCallBack'),
-            'wookimlik-settings'
+            'kolaykimlik-settings'
         );  
             add_settings_field(
             'header',
-            __('Etki Alanları<hr>', 'wookimlik'),
+            __('Etki Alanları<hr>', 'kolaykimlik'),
             array($this,'headerCb'),
-            'wookimlik-settings',
+            'kolaykimlik-settings',
             'defaultSection'
         );
         add_settings_field(
             'woocommerce_enable',
-            __('Aktif Et', 'wookimlik'),
+            __('Aktif Et', 'kolaykimlik'),
             array($this, 'woocommerceEnable'),
-            'wookimlik-settings',
+            'kolaykimlik-settings',
             'defaultSection'
         );
             add_settings_field(
             'woocommerce',
-            __('WooCommerce Ödeme Sayfası', 'wookimlik'),
+            __('WooCommerce Ödeme Sayfası', 'kolaykimlik'),
             array($this, 'woocommerceCallBack'),
-            'wookimlik-settings',
+            'kolaykimlik-settings',
             'defaultSection'
         );
         add_settings_field(
             'contactForm7',
-            __('Contact Form 7', 'wookimlik'),
+            __('Contact Form 7', 'kolaykimlik'),
             array($this, 'contactForm7CallBack'),
-            'wookimlik-settings',
+            'kolaykimlik-settings',
             'defaultSection'
         );
         add_settings_field(
             'ninjaForm',
-            __('Ninja Form', 'wookimlik'),
+            __('Ninja Form', 'kolaykimlik'),
             array($this, 'ninjaFormCallBack'),
-            'wookimlik-settings',
+            'kolaykimlik-settings',
             'defaultSection'
         );
         add_settings_field(
             'wpForms',
-            __('WPForms', 'wookimlik'),
+            __('WPForms', 'kolaykimlik'),
             array($this, 'wpFormCallBack'),
-            'wookimlik-settings',
+            'kolaykimlik-settings',
             'defaultSection'
         );
         register_setting('tcSettings', 'tcSettings', array($this, 'emptyCallBack'));
@@ -129,7 +129,7 @@ class tcinputSettings
         <form method="POST" action="options.php">
         <?php
         settings_fields('tcSettings');
-        do_settings_sections('wookimlik-settings');                
+        do_settings_sections('kolaykimlik-settings');                
         ?>
 		</form>
         <?php
