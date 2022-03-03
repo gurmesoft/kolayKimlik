@@ -26,14 +26,14 @@ require __DIR__ . '/vendor/autoload.php';
  *
  * @return void
  */
-function appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolaykimlik()
+function appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama()
 {
 
     if (!class_exists('Appsero\Client')) {
         require_once __DIR__ . '/appsero/src/Client.php';
     }
 
-    $client = new Appsero\Client('1a6f9ca6-536a-450b-877a-f0adadb5d297', 'T.C Kimlik & Vergi No Dogrulama - kolayKimlik', __FILE__);
+    $client = new Appsero\Client('413cb71d-9871-47e4-9c85-b1ca59681eb9', 'T.C Kimlik & Vergi No Dogrulama - Kolay Kimlik Doğrulama', __FILE__);
 
     // Active insights
     $client->insights()->init();
@@ -42,7 +42,7 @@ function appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolaykimlik()
     $client->updater();
 }
 
-appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolaykimlik();
+appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama();
 
 
 $SettingsPage = new tcinputSettings();
