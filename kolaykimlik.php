@@ -3,7 +3,7 @@
  * Plugin Name: kolayKimlik
  * Plugin URI: https://www.gurmewoo.com/
  * Description:
- * Version: 1.2.4
+ * Version: 1.2.5
  * Author: GurmeWoo.com
  * Author URI: https://www.gurmewoo.com
  * Plugin URI: https://gurmewoo.com/product/kolaykimlik-wordpress-woocommerce-kimlik-ve-vergi-numarasi-kontrol-eklentisi
