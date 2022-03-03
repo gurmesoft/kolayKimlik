@@ -2,7 +2,7 @@
 /*
  * Plugin Name: kolayKimlik
  * Plugin URI: https://www.gurmewoo.com/
- * Description:
+ * Description: T.C kimlik onayı ve Vergi Numarası onayı ile kullanıcı kayıtları, ödeme işlemleri ve çeşitli form eklentileri (Contact Form, NinjaForms, WPForms) kullanarak özelleştirilmiş formlar oluşturmaları için geliştirilmiştir.
  * Version: 1.2.5
  * Author: GurmeWoo.com
  * Author URI: https://www.gurmewoo.com
