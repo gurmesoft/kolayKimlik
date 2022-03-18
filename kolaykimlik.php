@@ -2,13 +2,8 @@
 /*
  * Plugin Name: kolayKimlik
  * Plugin URI: https://www.gurmewoo.com/
-<<<<<<< HEAD:wookimlik.php
- * Description:
- * Version: 1.2.2
-=======
  * Description: T.C kimlik onayı ve Vergi Numarası onayı ile kullanıcı kayıtları, ödeme işlemleri ve çeşitli form eklentileri (Contact Form, NinjaForms, WPForms) kullanarak özelleştirilmiş formlar oluşturmaları için geliştirilmiştir.
  * Version: 1.2.7
->>>>>>> b86e03198865603e56020f4b6476eae2631358eb:kolaykimlik.php
  * Author: GurmeWoo.com
  * Author URI: https://www.gurmewoo.com
  * Plugin URI: https://gurmewoo.com/product/kolaykimlik-wordpress-woocommerce-kimlik-ve-vergi-numarasi-kontrol-eklentisi
@@ -50,11 +45,11 @@ function appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama
 appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama();
 
 
-$SettingsPage = new tcinputSettings();
-$wooCheckOut = new wooCheckOut();
+$SettingsPage = new WK_tcinputSettings();
+$wooCheckOut = new WK_wooCheckOut();
 
 if (class_exists("WPCF7")) {
-    $CTF7 = new contactFormSeven();
+    $CTF7 = new WK_contactFormSeven();
 }
 // if(class_exists("WooCommerce")){
 //         $wooCheckOut = new wooCheckOut();  

@@ -1,6 +1,6 @@
 <?php
 
-class tcinputSettings
+class WK_tcinputSettings
 {   
     public function __construct(){
 
