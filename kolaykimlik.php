@@ -1,21 +1,26 @@
 <?php
 /*
- * Plugin Name: wooKimlik
+ * Plugin Name: kolayKimlik
  * Plugin URI: https://www.gurmewoo.com/
+<<<<<<< HEAD:wookimlik.php
  * Description:
  * Version: 1.2.2
+=======
+ * Description: T.C kimlik onayı ve Vergi Numarası onayı ile kullanıcı kayıtları, ödeme işlemleri ve çeşitli form eklentileri (Contact Form, NinjaForms, WPForms) kullanarak özelleştirilmiş formlar oluşturmaları için geliştirilmiştir.
+ * Version: 1.2.7
+>>>>>>> b86e03198865603e56020f4b6476eae2631358eb:kolaykimlik.php
  * Author: GurmeWoo.com
  * Author URI: https://www.gurmewoo.com
- * Plugin URI: https://gurmewoo.com/product/wookimlik-wordpress-woocommerce-kimlik-ve-vergi-numarasi-kontrol-eklentisi
- * Text Domain: WOOKIMLIK
+ * Plugin URI: https://gurmewoo.com/product/kolaykimlik-wordpress-woocommerce-kimlik-ve-vergi-numarasi-kontrol-eklentisi
+ * Text Domain: KOLAYKIMLIK
  * WC requires at least: 4.9
  * WC tested up to: 5.6
  * JIRAPROJECT: TI
  * JIRABOARDID: 14
- * ID: WOOKIMLIK
+ * ID: KOLAYKIMLIK
 */
 
-require_once 'includes/settings-wookimlik.php';
+require_once 'includes/settings-kolaykimlik.php';
 require_once 'includes/class-contactform7.php';
 require_once 'includes/class-ninjaform.php';
 require_once 'includes/class-woocommerce-checkout.php';
@@ -26,14 +31,14 @@ require __DIR__ . '/vendor/autoload.php';
  *
  * @return void
  */
-function appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_wookimlik()
+function appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama()
 {
 
     if (!class_exists('Appsero\Client')) {
         require_once __DIR__ . '/appsero/src/Client.php';
     }
 
-    $client = new Appsero\Client('1a6f9ca6-536a-450b-877a-f0adadb5d297', 'T.C Kimlik & Vergi No Dogrulama - wooKimlik', __FILE__);
+    $client = new Appsero\Client('413cb71d-9871-47e4-9c85-b1ca59681eb9', 'T.C Kimlik & Vergi No Dogrulama - Kolay Kimlik Doğrulama', __FILE__);
 
     // Active insights
     $client->insights()->init();
@@ -42,10 +47,7 @@ function appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_wookimlik()
     $client->updater();
 }
 
-appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_wookimlik();
-
-register_activation_hook(__FILE__, 'tcSettingsActiveHook');
-register_deactivation_hook(__FILE__, 'tcSettingsDeactiveHook');
+appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama();
 
 
 $SettingsPage = new tcinputSettings();
