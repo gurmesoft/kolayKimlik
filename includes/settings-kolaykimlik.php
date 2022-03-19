@@ -96,13 +96,13 @@ class WkTcInputSettings
     ?>
         <p>
             <select name="tcSettings[woocommerce]" id="woocommerce">
-                <option name="none" value="none" <?php echo $this->tcSettings['woocommerce'] == 'none'  ? 'selected' : ''; ?>><?php _e('Kapalı', 'tcinput'); ?></option>
-                <option name="standart" value="standart" <?php echo $this->tcSettings['woocommerce'] == 'standart'  ? 'selected' : ''; ?>><?php _e('Format Kontrol', 'tcinput'); ?></option>
-                <option name="nvi" value="nvi" <?php echo $this->tcSettings['woocommerce'] == 'nvi'  ? 'selected' : ''; ?>><?php _e('NVI Kontrol', 'tcinput'); ?></option>
+                <option value="none" <?php echo $this->tcSettings['woocommerce'] == 'none'  ? 'selected' : ''; ?>><?php _e('Kapalı', 'tcinput'); ?></option>
+                <option value="standart" <?php echo $this->tcSettings['woocommerce'] == 'standart'  ? 'selected' : ''; ?>><?php _e('Format Kontrol', 'tcinput'); ?></option>
+                <option value="nvi" <?php echo $this->tcSettings['woocommerce'] == 'nvi'  ? 'selected' : ''; ?>><?php _e('NVI Kontrol', 'tcinput'); ?></option>
             </select>
         </p>
         <p class="description">
-            <input type='checkbox' id='woocommerce' name='tcSettings[woocommerceRequired]' <?php echo ($this->tcSettings['woocommerceRequired'] == 'on' ? 'checked' : '') ?> />
+            <input type='checkbox' id='woocommerce' name='tcSettings[woocommerceRequired]' <?php echo $this->tcSettings['woocommerceRequired'] == 'on' ? 'checked' : '' ?> />
             <label for='tcSettings[woocommerceRequired]'> Zorunlu Alan Olarak Ekle </label>
         </p>
         <p class="description">Bu özellik ile WooCommerce ödeme sayfanıza TC kimlik giriş alanı ekleyebilirsiniz."Format Kontrol" girilen numaranın sadece TC kimlik numara algoritması ile kontrolünü sağlar.<br>
@@ -110,9 +110,9 @@ class WkTcInputSettings
             Her iki kontrolü de "Zorunlu Alan Olarak Ekle" seçeneği ile isteğe bağlı bırakabilir yada zorunlu kılabilirsiniz. </p>
         <p>
         <p> <img src="<?php echo plugin_dir_url(__DIR__) ?>assets/woocommerce.png" alt="WooCommerce"></p>
-        <input type='checkbox' id='woocommerceVergi' name='tcSettings[woocommerceVergi]' <?php echo ($this->tcSettings['woocommerceVergi'] == 'on' ? 'checked' : '') ?> />
+        <input type='checkbox' id='woocommerceVergi' name='tcSettings[woocommerceVergi]' <?php echo $this->tcSettings['woocommerceVergi'] == 'on' ? 'checked' : '' ?> />
         <label for='tcSettings[woocommerceRequired]'> Vergi Dairesi/No Alanı Ekle </label></p>
-        <input type='checkbox' id='woocommerceRequiredVergiAlani' name='tcSettings[woocommerceRequiredVergi]' <?php echo ($this->tcSettings['woocommerceRequiredVergi'] == 'on' ? 'checked' : '') ?> />
+        <input type='checkbox' id='woocommerceRequiredVergiAlani' name='tcSettings[woocommerceRequiredVergi]' <?php echo $this->tcSettings['woocommerceRequiredVergi'] == 'on' ? 'checked' : '' ?> />
         <label for='tcSettings[woocommerceRequired]'>Zorunlu Alan Olarak Ekle </label></p>
         <p> <img style="width: 400px; height: 60px;" src="<?php echo plugin_dir_url(__DIR__) ?>assets/woocommerceVergi.png" alt="WooCommerce"></p>
         <hr>
