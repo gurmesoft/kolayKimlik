@@ -11,14 +11,14 @@ class WkWooCheckOut
             add_action('woocommerce_admin_order_data_after_billing_address', array($this, "siparisFaturaBilgileri"));
         }
     }
-    function siparisFaturaBilgileri($siparis)
+    public function siparisFaturaBilgileri($siparis)
     {
         $musteri = $siparis->get_customer_id();
         echo '<div class="address"><p><strong>TC Kimlik No:</strong> ' . get_user_meta($musteri, 'billing_tckimlik', true) . '</p>';
         echo '<p><strong>Vergi Dairesi:</strong> ' . get_user_meta($musteri, 'billing_vergiDairesi', true) . '</p>';
         echo '<p><strong>Vergi No:</strong> ' . get_user_meta($musteri, 'billing_vergiNo', true) . '</p></div>';
     }
-    function yeniAlanlarEkle($alanlar)
+    public function yeniAlanlarEkle($alanlar)
     {
         if ($this->tcSettings['woocommerce'] != 'none') {
             $alanlar['billing']['billing_tckimlik'] = array(
@@ -62,7 +62,7 @@ class WkWooCheckOut
         }
         return $alanlar;
     }
-    function hataEkle($errors)
+    public function hataEkle($errors)
     {
         if ($this->tcSettings['woocommerce'] == 'standart' && $this->tcSettings['woocommerceRequired'] == 'on') {
             $data = array(

@@ -23,6 +23,7 @@ class WkContactFormSeven
             )
         );
     }
+
     public function bilgiKontrolCF7($result, $tag)
     {
         foreach ($tag['options'] as $item) {
