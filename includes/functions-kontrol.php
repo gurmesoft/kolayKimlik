@@ -45,7 +45,7 @@ function standartSorgulama($tckimlik)
 		}
 	}
 
-	if ($tckimlik[0] == 0 or !ctype_digit($tckimlik) or strlen($tckimlik) != 11) {
+	if ($tckimlik[0] == 0 || !ctype_digit($tckimlik) || strlen($tckimlik) != 11) {
 		return false;
 	} else {
 		$ilkt = null;
@@ -61,7 +61,7 @@ function standartSorgulama($tckimlik)
 			$tumt += $tckimlik[$a];
 		}
 
-		if (($ilkt * 7 - $sont) % 10 != $tckimlik[9] or $tumt % 10 != $tckimlik[10]) {
+		if (($ilkt * 7 - $sont) % 10 != $tckimlik[9] || $tumt % 10 != $tckimlik[10]) {
 			return false;
 		}
 	}

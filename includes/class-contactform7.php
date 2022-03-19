@@ -202,7 +202,7 @@ class WkContactFormSeven
                 $atts,
                 $validation_error
             );
-        } else if ($hasnvi &&  $tagValide) {
+        } else if ($hasnvi &&  !$tagValide) {
             $html = sprintf(
                 '<label>Ad</label><br>
                     <span class="wpcf7-form-control-wrap"><input type="text" name="nameoftc" value="" size="40" class="wpcf7-form-control  wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
@@ -216,7 +216,7 @@ class WkContactFormSeven
                 $atts,
                 $validation_error
             );
-        } else if ($tag['options'] &&  $tag->is_required()) {
+        } else if (!$tag['options'] &&  $tagValide) {
             $html = sprintf(
                 '<label>Tc Kimlik Numarası(required)</label><br>
                     <span class="wpcf7-form-control-wrap %1$s"><input %2$s />%3$s</span>',
