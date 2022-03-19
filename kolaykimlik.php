@@ -45,11 +45,11 @@ function appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama
 appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama();
 
 
-$SettingsPage = new Wk_tcinputSettings();
-$wooCheckOut = new Wk_wooCheckOut();
+$SettingsPage = new WkTcInputSettings();
+$wooCheckOut = new WkWooCheckOut();
 
 if (class_exists("WPCF7")) {
-    $CTF7 = new Wk_contactFormSeven();
+    $CTF7 = new WkContactFormSeven();
 }
 // if(class_exists("WooCommerce")){
 //         $wooCheckOut = new wooCheckOut();  

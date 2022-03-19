@@ -1,6 +1,6 @@
 <?php
 require_once('functions-kontrol.php');
-class Wk_wooCheckOut
+class WkWooCheckOut
 {
     public function __construct()
     {
