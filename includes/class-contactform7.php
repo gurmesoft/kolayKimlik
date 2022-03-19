@@ -81,7 +81,7 @@ class WkContactFormSeven
                 if (!is_numeric($tc)) {
                     $result->invalidate($tag, wpcf7_get_message('invalid_value'));
                 }
-                if (standartSorgulama($tc) == false) {
+                if (!standartSorgulama($tc)) {
                     $result->invalidate($tag, wpcf7_get_message('invalid_tc'));
                 }
             }

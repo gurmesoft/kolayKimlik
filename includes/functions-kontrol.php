@@ -41,13 +41,14 @@ function standartSorgulama($tckimlik)
 	$engelliNolar = array('11111111110', '22222222220', '33333333330', '44444444440', '55555555550', '66666666660', '7777777770', '88888888880', '99999999990');
 	foreach ($engelliNolar as $no) {
 		if ($tckimlik == $no) {
-			return;
+			return false;
 		}
 	}
 
 	if ($tckimlik[0] == 0 || !ctype_digit($tckimlik) || strlen($tckimlik) != 11) {
 		return false;
 	} else {
+
 		$ilkt = null;
 		$sont = null;
 		$tumt = null;
@@ -64,8 +65,9 @@ function standartSorgulama($tckimlik)
 		if (($ilkt * 7 - $sont) % 10 != $tckimlik[9] || $tumt % 10 != $tckimlik[10]) {
 			return false;
 		}
+
+		return true;
 	}
-	return true;
 }
 
 function vergiKontrol($taxNumber)

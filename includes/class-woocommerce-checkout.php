@@ -62,7 +62,7 @@ class WkWooCheckOut
         }
         return $alanlar;
     }
-    function hataEkle($fields, $errors)
+    function hataEkle($errors)
     {
         if ($this->tcSettings['woocommerce'] == 'standart' && $this->tcSettings['woocommerceRequired'] == 'on') {
             $data = array(
@@ -96,7 +96,7 @@ class WkWooCheckOut
                 $customError = '<strong>Fatura Fatura Doğum Yılı</strong> gerekli bir alandır.';
                 $errors->add('validation', $customError);
             }
-            if (!is_numeric($data["tcno"]) or !is_numeric($data["dogumyili"])) {
+            if (!is_numeric($data["tcno"]) || !is_numeric($data["dogumyili"])) {
                 $customError = '<strong>Fatura  TC Kimlik Numarasi ve Doğum Yılı</strong> sadece rakam içerebilir.';
                 $errors->add('validation', $customError);
             }
@@ -107,7 +107,7 @@ class WkWooCheckOut
         } else if ($this->tcSettings['woocommerce'] == 'standart' && $this->tcSettings['woocommerceRequired'] == null) {
             //Otomatik doldurma secenegi eklenebilir
         }
-        if ($this->tcSettings["woocommerceVergi"] == "on" and $this->tcSettings["woocommerceRequiredVergi"] == "on") {
+        if ($this->tcSettings["woocommerceVergi"] == "on" && $this->tcSettings["woocommerceRequiredVergi"] == "on") {
             $data = array(
                 'vergidairesi' => sanitize_text_field(__($_POST['billing_vergiDairesi'])),
                 'vergino' => sanitize_text_field(__($_POST['billing_vergiNo'])),
