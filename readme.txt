@@ -1,8 +1,8 @@
 === T.C Kimlik & Vergi No Dogrulama - Kolay Kimlik Doğrulama ===
 Contributors: ftpyz,gurmehub
 Tags: tc,vergino,kimlik
-Requires at least: 5.8
-Tested up to: 5.8
+Requires at least: 5.9
+Tested up to: 5.9
 Requires PHP: 8.0
 License: GPL
 
