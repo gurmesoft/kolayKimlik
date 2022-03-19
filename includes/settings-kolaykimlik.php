@@ -109,12 +109,12 @@ class WkTcInputSettings
             "NVI Kontrol" seçildiğinde TC kimlik ve Doğum Yılı bölümü eklenecektir. Ad,Soyad,Doğum Yılı ve TC Kimlik alanlarına girilen bilgiler nufus müdürlüğü sistemine kayıtlı bilgler ile doğrulanır.<br>
             Her iki kontrolü de "Zorunlu Alan Olarak Ekle" seçeneği ile isteğe bağlı bırakabilir yada zorunlu kılabilirsiniz. </p>
         <p>
-        <p> <img src="<?php echo plugin_dir_url(__DIR__) ?>assets/woocommerce.png"></p>
+        <p> <img src="<?php echo plugin_dir_url(__DIR__) ?>assets/woocommerce.png" alt="WooCommerce"></p>
         <input type='checkbox' id='woocommerceVergi' name='tcSettings[woocommerceVergi]' <?php echo ($this->tcSettings['woocommerceVergi'] == 'on' ? 'checked' : '') ?> />
         <label for='tcSettings[woocommerceRequired]'> Vergi Dairesi/No Alanı Ekle </label></p>
         <input type='checkbox' id='woocommerceRequiredVergiAlani' name='tcSettings[woocommerceRequiredVergi]' <?php echo ($this->tcSettings['woocommerceRequiredVergi'] == 'on' ? 'checked' : '') ?> />
         <label for='tcSettings[woocommerceRequired]'>Zorunlu Alan Olarak Ekle </label></p>
-        <p> <img style="width: 400px; height: 60px;" src="<?php echo plugin_dir_url(__DIR__) ?>assets/woocommerceVergi.png"></p>
+        <p> <img style="width: 400px; height: 60px;" src="<?php echo plugin_dir_url(__DIR__) ?>assets/woocommerceVergi.png" alt="WooCommerce"></p>
         <hr>
         <input type="submit" class="button button-primary" value="Ayarı Kaydet" />
     <?php
@@ -125,7 +125,7 @@ class WkTcInputSettings
         <p class="description">Bu özellik ile contact form eklentinize tckimlik,tckimlik nvi etiketleri eklenecektir.Bu etiketler ile formlarınıza tc kimlik sorgulama alanları ekleyebilirsiniz.<br>
             Nvi opsiyonlu etiket seçildiğinde 4 adet giriş bölümü açılacaktır. Ad,Soyad,Doğum Yılı ve TC Kimlik bu alanlara girilen bilgiler nufus müdürlüğü sistemine kayıtlı bilgler ile doğrulanır.<br>
             Her iki etiketide zorunlu kılma seçeneği formu düzenlediğiniz bölümde size sunulmuştur.</p>
-        <p> <img src="<?php echo plugin_dir_url(__DIR__) ?>assets/contactform7.png"></p>
+        <p> <img src="<?php echo plugin_dir_url(__DIR__) ?>assets/contactform7.png" alt="WooCommerce"></p>
         <hr>
     <?php
     }

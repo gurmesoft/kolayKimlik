@@ -32,7 +32,7 @@ class WkContactFormSeven
                 $hasnvi = true;
             }
         }
-        if ($hasnvi == true) {
+        if ($hasnvi) {
             $data = array();
             $name = $tag->name;
             $tc = isset($_POST[$name]) ? trim(wp_unslash(strtr((string) $_POST[$name], "\n", " "))) : '';
@@ -172,11 +172,7 @@ class WkContactFormSeven
 
         $atts['value'] = $value;
 
-        if (wpcf7_support_html5()) {
-            $atts['type'] = 'text';
-        } else {
-            $atts['type'] = 'text';
-        }
+        $atts['type'] = 'text';
 
         $atts['name'] = $tag->name;
 
@@ -190,7 +186,7 @@ class WkContactFormSeven
             }
         }
 
-        if ($hasnvi &&  $tag->is_required()) {
+        if ($hasnvi &&  $tag->is_required() == true) {
             $html = sprintf(
                 '<label>Ad (required)</label><br>
                     <span class="wpcf7-form-control-wrap"><input type="text" name="nameoftc" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
@@ -253,7 +249,7 @@ class WkContactFormSeven
         );
     }
 
-    public function nviSemaOlustur($contact_form, $args = '')
+    public function nviSemaOlustur($args = '')
     {
         $args = wp_parse_args($args, array());
         $type = $args['id'];
@@ -337,7 +333,7 @@ class WkContactFormSeven
     <?php
     }
 
-    public function SemaOlustur($contact_form, $args = '')
+    public function SemaOlustur($args = '')
     {
         $args = wp_parse_args($args, array());
         $type = $args['id'];
