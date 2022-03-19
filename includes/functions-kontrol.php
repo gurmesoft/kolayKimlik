@@ -21,7 +21,9 @@ function nviSorgulama($data)
 	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_HEADER, false);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	if (is_string($data)) {
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	}
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 		'POST /Service/KPSPublic.asmx HTTP/1.1',
 		'Host: tckimlik.nvi.gov.tr',

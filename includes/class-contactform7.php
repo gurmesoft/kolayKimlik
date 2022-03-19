@@ -186,7 +186,9 @@ class WkContactFormSeven
             }
         }
 
-        if ($hasnvi &&  $tag->is_required() == true) {
+        $tagValide = $tag->is_required();
+
+        if ($hasnvi &&  $tagValide) {
             $html = sprintf(
                 '<label>Ad (required)</label><br>
                     <span class="wpcf7-form-control-wrap"><input type="text" name="nameoftc" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
@@ -200,7 +202,7 @@ class WkContactFormSeven
                 $atts,
                 $validation_error
             );
-        } else if ($hasnvi &&  $tag->is_required()) {
+        } else if ($hasnvi &&  $tagValide) {
             $html = sprintf(
                 '<label>Ad</label><br>
                     <span class="wpcf7-form-control-wrap"><input type="text" name="nameoftc" value="" size="40" class="wpcf7-form-control  wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
