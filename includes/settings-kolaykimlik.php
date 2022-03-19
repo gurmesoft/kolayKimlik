@@ -88,7 +88,7 @@ class WkTcInputSettings
     public function woocommerceEnable()
     {
 ?>
-        <input type='checkbox' id='woocommerce' name='tcSettings[enabled]' <?php echo ($this->tcSettings['enabled'] == 'on' ? 'checked' : '') ?> />
+        <input type='checkbox' id='woocommerce' name='tcSettings[enabled]' <?php echo $this->tcSettings['enabled'] == 'on' ? 'checked' : '' ?> />
     <?php
     }
     public function woocommerceCallBack()
