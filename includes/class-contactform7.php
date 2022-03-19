@@ -46,10 +46,10 @@ class WkContactFormSeven
 
             if ('tckimlik' == $tag->basetype) {
 
-                if ($tag->is_required() and '' === $tc) {
+                if ($tag->is_required() && '' === $tc) {
                     $result->invalidate($tag, wpcf7_get_message('invalid_required'));
                 }
-                if (standartSorgulama($tc) == false) {
+                if (!standartSorgulama($tc)) {
 
                     $result->invalidate($tag, wpcf7_get_message('invalid_tc'));
                 }
@@ -62,10 +62,10 @@ class WkContactFormSeven
                 if (empty($yearOfTC)) {
                     $result->invalidate($tag, wpcf7_get_message('invalid_year'));
                 }
-                if (!is_numeric($tc) or !is_numeric($yearOfTC)) {
+                if (!is_numeric($tc) || !is_numeric($yearOfTC)) {
                     $result->invalidate($tag, wpcf7_get_message('invalid_value'));
                 }
-                if (nviSorgulama($data) == 'false') {
+                if (!nviSorgulama($data)) {
                     $result->invalidate($tag, wpcf7_get_message('invalid_data'));
                 }
             }
@@ -75,7 +75,7 @@ class WkContactFormSeven
             $tc = isset($_POST[$name]) ? trim(wp_unslash(strtr((string) $_POST[$name], "\n", " "))) : '';
 
             if ('tckimlik' == $tag->basetype) {
-                if ($tag->is_required() and '' === $tc) {
+                if ($tag->is_required() && '' === $tc) {
                     $result->invalidate($tag, wpcf7_get_message('invalid_required'));
                 }
                 if (!is_numeric($tc)) {
@@ -190,7 +190,7 @@ class WkContactFormSeven
             }
         }
 
-        if ($hasnvi == true &&  $tag->is_required() ==  true) {
+        if ($hasnvi &&  $tag->is_required()) {
             $html = sprintf(
                 '<label>Ad (required)</label><br>
                     <span class="wpcf7-form-control-wrap"><input type="text" name="nameoftc" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
@@ -204,7 +204,7 @@ class WkContactFormSeven
                 $atts,
                 $validation_error
             );
-        } else if ($hasnvi == true &&  $tag->is_required() == false) {
+        } else if ($hasnvi &&  $tag->is_required()) {
             $html = sprintf(
                 '<label>Ad</label><br>
                     <span class="wpcf7-form-control-wrap"><input type="text" name="nameoftc" value="" size="40" class="wpcf7-form-control  wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
@@ -218,7 +218,7 @@ class WkContactFormSeven
                 $atts,
                 $validation_error
             );
-        } else if ($tag['options'] == null &&  $tag->is_required() == true) {
+        } else if ($tag['options'] &&  $tag->is_required()) {
             $html = sprintf(
                 '<label>Tc Kimlik Numarası(required)</label><br>
                     <span class="wpcf7-form-control-wrap %1$s"><input %2$s />%3$s</span>',
