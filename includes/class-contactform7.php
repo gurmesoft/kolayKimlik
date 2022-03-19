@@ -1,7 +1,7 @@
 <?php
 require_once('functions-kontrol.php');
 
-class WK_contactFormSeven
+class Wk_contactFormSeven
 {
     public function __construct()
     {

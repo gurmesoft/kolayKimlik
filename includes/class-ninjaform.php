@@ -1,6 +1,6 @@
 <?php
 require_once('functions-kontrol.php');
-class WK_ninjaForm
+class Wk_ninjaForm
 {
     public function __construct()
     {

@@ -1,8 +1,7 @@
 <?php
 require_once('functions-kontrol.php');
-class WK_wooCheckOut
+class Wk_wooCheckOut
 {
-
     public function __construct()
     {
         $this->tcSettings = get_option('tcSettings');
