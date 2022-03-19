@@ -51,9 +51,3 @@ $wooCheckOut = new WkWooCheckOut();
 if (class_exists("WPCF7")) {
     $CTF7 = new WkContactFormSeven();
 }
-// if(class_exists("WooCommerce")){
-//         $wooCheckOut = new wooCheckOut();  
-// }
-// if(class_exists("Ninja_Forms")){
-//     $NinjaForm = new ninjaForm();  
-// }
