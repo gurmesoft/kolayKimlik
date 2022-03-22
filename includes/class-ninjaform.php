@@ -19,7 +19,7 @@ class WkNinjaForm
 
                     $errors = [
                         'fields' => [
-                            'tc-no' => __('Hatalı Tc No Formatı', 'tcinput'),
+                            'tc-no' => __('Hatalı Tc No Formatı', 'kolay-kimlik'),
                         ]
                     ];
 

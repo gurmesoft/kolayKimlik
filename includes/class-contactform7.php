@@ -5,7 +5,6 @@ class WkContactFormSeven
 {
     public function __construct()
     {
-
         add_action('wpcf7_init', array($this, 'tagEkleTcKimlik'));
         add_filter('wpcf7_validate_tckimlik*', array($this, 'bilgiKontrolCF7'), 10, 2);
         add_filter('wpcf7_messages', array($this, 'hataMesajlari'), 10, 1);
@@ -14,7 +13,6 @@ class WkContactFormSeven
 
     public function tagEkleTcKimlik()
     {
-
         wpcf7_add_form_tag(
             array('tckimlik', 'tckimlik*'),
             array($this, 'tagOlustur'),
@@ -27,31 +25,27 @@ class WkContactFormSeven
     public function bilgiKontrolCF7($result, $tag)
     {
         foreach ($tag['options'] as $item) {
-
             if ($item == 'nvi') {
-
                 $hasnvi = true;
             }
         }
         if ($hasnvi) {
             $data = array();
             $name = $tag->name;
-            $tc = isset($_POST[$name]) ? trim(wp_unslash(strtr((string) $_POST[$name], "\n", " "))) : '';
+            $tc = isset($_POST[$name]) ? sanitize_text_field($_POST[$name]) : '';
             $data['tcno'] = $tc;
-            $nameOfTC = isset($_POST['nameoftc']) ? trim(wp_unslash(strtr((string) $_POST['nameoftc'], "\n", " "))) : '';
+            $nameOfTC = isset($_POST['nameoftc']) ?  sanitize_text_field($_POST["nameoftc"]) : '';
             $data['isim'] = $nameOfTC;
-            $surnameOfTC = isset($_POST['surnameoftc']) ? trim(wp_unslash(strtr((string) $_POST['surnameoftc'], "\n", " "))) : '';
+            $surnameOfTC = isset($_POST['surnameoftc']) ?  sanitize_text_field($_POST["surnameoftc"]) : '';
             $data['soyisim'] = $surnameOfTC;
-            $yearOfTC = isset($_POST['yearoftc']) ? trim(wp_unslash(strtr((string) $_POST['yearoftc'], "\n", " "))) : '';
+            $yearOfTC = isset($_POST['yearoftc']) ? sanitize_text_field($_POST["yearoftc"]) : '';
             $data['dogumyili'] = $yearOfTC;
 
             if ('tckimlik' == $tag->basetype) {
-
                 if ($tag->is_required() && '' === $tc) {
                     $result->invalidate($tag, wpcf7_get_message('invalid_required'));
                 }
                 if (!standartSorgulama($tc)) {
-
                     $result->invalidate($tag, wpcf7_get_message('invalid_tc'));
                 }
                 if (empty($nameOfTC)) {
@@ -66,14 +60,13 @@ class WkContactFormSeven
                 if (!is_numeric($tc) || !is_numeric($yearOfTC)) {
                     $result->invalidate($tag, wpcf7_get_message('invalid_value'));
                 }
-                if (!nviSorgulama($data)) {
+                if (nviSorgulama($data)=='false') {
                     $result->invalidate($tag, wpcf7_get_message('invalid_data'));
                 }
             }
         } else {
-
             $name = $tag->name;
-            $tc = isset($_POST[$name]) ? trim(wp_unslash(strtr((string) $_POST[$name], "\n", " "))) : '';
+            $tc = isset($_POST[$name]) ? sanitize_text_field($_POST[$name]) : '';
 
             if ('tckimlik' == $tag->basetype) {
                 if ($tag->is_required() && '' === $tc) {
@@ -96,46 +89,45 @@ class WkContactFormSeven
         $messages = array_merge($messages, array(
             'invalid_tc' => array(
                 'description' =>
-                __("Girilen değer, Tc Kimlik No formatında değildir.", 'tcinput'),
+                __("Girilen değer, Tc Kimlik No formatında değildir.", 'kolay-kimlik'),
                 'default' =>
-                __("Girilen değer, Tc Kimlik No formatında değildir.", 'tcinput'),
+                __("Girilen değer, Tc Kimlik No formatında değildir.", 'kolay-kimlik'),
             ),
             'invalid_name' => array(
                 'description' =>
-                __("Ad Bilgisi Eksik Bırakılamaz.", 'tcinput'),
+                __("Ad Bilgisi Eksik Bırakılamaz.", 'kolay-kimlik'),
                 'default' =>
-                __("Ad Bilgisi Eksik Bırakılamaz.", 'tcinput'),
+                __("Ad Bilgisi Eksik Bırakılamaz.", 'kolay-kimlik'),
             ),
             'invalid_surname' => array(
                 'description' =>
-                __("Soyad Bilgisi Eksik Bırakılamaz.", 'tcinput'),
+                __("Soyad Bilgisi Eksik Bırakılamaz.", 'kolay-kimlik'),
                 'default' =>
-                __("Soyad Bilgisi Eksik Bırakılamaz.", 'tcinput'),
+                __("Soyad Bilgisi Eksik Bırakılamaz.", 'kolay-kimlik'),
             ),
             'invalid_year' => array(
                 'description' =>
-                __("Yıl Bilgisi Eksik Bırakılamaz.", 'tcinput'),
+                __("Yıl Bilgisi Eksik Bırakılamaz.", 'kolay-kimlik'),
                 'default' =>
-                __("Yıl Bilgisi Eksik Bırakılamaz.", 'tcinput'),
+                __("Yıl Bilgisi Eksik Bırakılamaz.", 'kolay-kimlik'),
             ),
             'invalid_data' => array(
                 'description' =>
-                __("Girilen Bilgiler Uyumsuz.", 'tcinput'),
+                __("Girilen Bilgiler Uyumsuz.", 'kolay-kimlik'),
                 'default' =>
-                __("Girilen Bilgiler Uyumsuz.", 'tcinput'),
+                __("Girilen Bilgiler Uyumsuz.", 'kolay-kimlik'),
             ),
             'invalid_value' => array(
                 'description' =>
-                __("Yıl ve TC Kimlik Bilgileri Sadece Rakam İçerebilir.", 'tcinput'),
+                __("Yıl ve TC Kimlik Bilgileri Sadece Rakam İçerebilir.", 'kolay-kimlik'),
                 'default' =>
-                __("Yıl ve TC Kimlik Bilgileri Sadece Rakam İçerebilir.", 'tcinput'),
+                __("Yıl ve TC Kimlik Bilgileri Sadece Rakam İçerebilir.", 'kolay-kimlik'),
             )
         ));
         return $messages;
     }
     public function tagOlustur($tag)
     {
-
         if (empty($tag->name)) {
             return '';
         }
@@ -180,9 +172,7 @@ class WkContactFormSeven
         $atts = wpcf7_format_atts($atts);
 
         foreach ($tag['options'] as $item) {
-
             if ($item == 'nvi') {
-
                 $hasnvi = true;
             }
         }
@@ -203,7 +193,7 @@ class WkContactFormSeven
                 $atts,
                 $validation_error
             );
-        } else if ($hasnvi &&  !$tagValide) {
+        } elseif ($hasnvi &&  !$tagValide) {
             $html = sprintf(
                 '<label>Ad</label><br>
                     <span class="wpcf7-form-control-wrap"><input type="text" name="nameoftc" value="" size="40" class="wpcf7-form-control  wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
@@ -217,7 +207,7 @@ class WkContactFormSeven
                 $atts,
                 $validation_error
             );
-        } else if (!$tag['options'] &&  $tagValide) {
+        } elseif (!$tag['options'] &&  $tagValide) {
             $html = sprintf(
                 '<label>Tc Kimlik Numarası(required)</label><br>
                     <span class="wpcf7-form-control-wrap %1$s"><input %2$s />%3$s</span>',
@@ -242,12 +232,12 @@ class WkContactFormSeven
         $tag_generator = WPCF7_TagGenerator::get_instance();
         $tag_generator->add(
             'tckimliknvi',
-            __('tckimlik nvi', 'tcinput'),
+            __('tckimlik nvi', 'kolay-kimlik'),
             array($this, 'nviSemaOlustur')
         );
         $tag_generator->add(
             'tckimlik',
-            __('tckimlik', 'tcinput'),
+            __('tckimlik', 'kolay-kimlik'),
             array($this, 'SemaOlustur')
         );
     }
@@ -262,12 +252,10 @@ class WkContactFormSeven
         }
 
         if ('tckimlik' == $type) {
-            $description = __("Bu etiket iletişim formunuza Ad,Soyad,Doğum Yılı ve Tc Kimlik girişi yapılabilecek alanlar ekler. (Uyumluluğu kontrol eder, uyumsuz bilgi girişini engeller.) ", 'contact-form-7');
+            $description = __("Bu etiket iletişim formunuza Ad,Soyad,Doğum Yılı ve Tc Kimlik girişi yapılabilecek alanlar ekler. (Uyumluluğu kontrol eder, uyumsuz bilgi girişini engeller. ", 'kolay-kimlik');
         }
 
-        $desc_link = wpcf7_link(__('https://contactform7.com/text-fields/', 'contact-form-7'), __('Text fields', 'contact-form-7'));
-
-?>
+        $desc_link = wpcf7_link(__('https://contactform7.com/text-fields/', 'contact-form-7'), __('Text fields', 'contact-form-7')); ?>
         <div class="control-box">
             <fieldset>
                 <legend><?php echo sprintf(esc_html($description), $desc_link); ?></legend>
@@ -349,9 +337,7 @@ class WkContactFormSeven
             $description = __("Bu etiket iletişim formunuza  Tc Kimlik girişi yapılabilecek alan ekler. (Girişin TC Kimlik No formatına uyumluluğunu kontrol eder, tutarsız rakam girişini engeller.) ", 'contact-form-7');
         }
 
-        $desc_link = wpcf7_link(__('https://contactform7.com/text-fields/', 'contact-form-7'), __('Text fields', 'contact-form-7'));
-
-    ?>
+        $desc_link = wpcf7_link(__('https://contactform7.com/text-fields/', 'contact-form-7'), __('Text fields', 'contact-form-7')); ?>
         <div class="control-box">
             <fieldset>
                 <legend><?php echo sprintf(esc_html($description), $desc_link); ?></legend>
