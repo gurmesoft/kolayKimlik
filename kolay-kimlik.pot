@@ -95,11 +95,11 @@ msgid "TC Kimlik No"
 msgstr ""
 
 #: includes/class-contactform7.php:240
-msgid "tckimlik"
+msgid "tc_kimlik"
 msgstr ""
 
 #: includes/class-contactform7.php:235
-msgid "tckimlik nvi"
+msgid "tc_kimlik nvi"
 msgstr ""
 
 #: includes/class-woocommerce-checkout.php:50

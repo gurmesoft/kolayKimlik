@@ -3,60 +3,64 @@ require_once( 'functions-kontrol.php' );
 
 class KK_ContactForm_Seven {
 	public function __construct() {
-		add_action( 'wpcf7_init', array( $this, 'tagEkleTcKimlik' ) );
-		add_filter( 'wpcf7_validate_tckimlik*', array( $this, 'bilgiKontrolCF7' ), 10, 2 );
-		add_filter( 'wpcf7_messages', array( $this, 'hataMesajlari' ), 10, 1 );
-		add_action( 'wpcf7_admin_init', array( $this, 'semayaEkle' ), 15, 0 );
+		add_action( 'wpcf7_init', array( $this, 'tag_ekle_tc_kimlik' ) );
+		add_filter( 'wpcf7_validate_tc_kimlik*', array( $this, 'bilgi_kontrol_c_f7' ), 10, 2 );
+		add_filter( 'wpcf7_messages', array( $this, 'hata_mesajlari' ), 10, 1 );
+		add_action( 'wpcf7_admin_init', array( $this, 'sermaye_ekle' ), 15, 0 );
 	}
 
-	public function tagEkleTcKimlik() {
+	public function tag_ekle_tc_kimlik() {
 		wpcf7_add_form_tag(
-			array( 'tckimlik', 'tckimlik*' ),
-			array( $this, 'tagOlustur' ),
+			array( 'tc_kimlik', 'tc_kimlik*' ),
+			array( $this, 'tag_olustur' ),
 			array(
 				'name-attr' => true,
 			)
 		);
 	}
 
-	public function bilgiKontrolCF7( $result, $tag ) {
+	public function bilgi_kontrol_c_f7( $result, $tag ) {
+		if ( ! wp_verify_nonce( $nonce, 'my-nonce' ) ) {
+			die( 'Security check' );
+		}
+
 		foreach ( $tag['options'] as $item ) {
-			if ( $item == 'nvi' ) {
+			if ( 'nvi' === $item ) {
 				$hasnvi = true;
 			}
 		}
 		if ( $hasnvi ) {
-			$data = array();
-			$name = $tag->name;
-			$tc = isset( $_POST[ $name ] ) ? sanitize_text_field( $_POST[ $name ] ) : '';
-			$data['tcno'] = $tc;
-			$nameOfTC = isset( $_POST['nameoftc'] ) ? sanitize_text_field( $_POST['nameoftc'] ) : '';
-			$data['isim'] = $nameOfTC;
-			$surnameOfTC = isset( $_POST['surnameoftc'] ) ? sanitize_text_field( $_POST['surnameoftc'] ) : '';
-			$data['soyisim'] = $surnameOfTC;
-			$yearOfTC = isset( $_POST['yearoftc'] ) ? sanitize_text_field( $_POST['yearoftc'] ) : '';
-			$data['dogumyili'] = $yearOfTC;
+			$data              = array();
+			$name              = $tag->name;
+			$tc                = isset( $_POST[ $name ] ) ? sanitize_text_field( $_POST[ $name ] ) : '';
+			$data['tcno']      = $tc;
+			$name_of_t_c       = isset( $_POST['name_of_t_c'] ) ? sanitize_text_field( $_POST['name_of_t_c'] ) : '';
+			$data['isim']      = $name_of_t_c;
+			$surname_of_t_c    = isset( $_POST['surname_of_t_c'] ) ? sanitize_text_field( $_POST['surname_of_t_c'] ) : '';
+			$data['soyisim']   = $surname_of_t_c;
+			$year_of_t_c       = isset( $_POST['year_of_t_c'] ) ? sanitize_text_field( $_POST['year_of_t_c'] ) : '';
+			$data['dogumyili'] = $year_of_t_c;
 
-			if ( 'tckimlik' == $tag->basetype ) {
+			if ( 'tc_kimlik' === $tag->basetype ) {
 				if ( $tag->is_required() && '' === $tc ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_required' ) );
 				}
-				if ( ! standartSorgulama( $tc ) ) {
+				if ( ! standart_sorgulama( $tc ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_tc' ) );
 				}
-				if ( empty( $nameOfTC ) ) {
+				if ( empty( $name_of_t_c ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_name' ) );
 				}
-				if ( empty( $surnameOfTC ) ) {
+				if ( empty( $surname_of_t_c ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_surname' ) );
 				}
-				if ( empty( $yearOfTC ) ) {
+				if ( empty( $year_of_t_c ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_year' ) );
 				}
-				if ( ! is_numeric( $tc ) || ! is_numeric( $yearOfTC ) ) {
+				if ( ! is_numeric( $tc ) || ! is_numeric( $year_of_t_c ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_value' ) );
 				}
-				if ( nviSorgulama( $data ) == 'false' ) {
+				if ( false === nvi_sorgulama( $data ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_data' ) );
 				}
 			}
@@ -64,14 +68,14 @@ class KK_ContactForm_Seven {
 			$name = $tag->name;
 			$tc = isset( $_POST[ $name ] ) ? sanitize_text_field( $_POST[ $name ] ) : '';
 
-			if ( 'tckimlik' == $tag->basetype ) {
+			if ( 'tc_kimlik' == $tag->basetype ) {
 				if ( $tag->is_required() && '' === $tc ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_required' ) );
 				}
 				if ( ! is_numeric( $tc ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_value' ) );
 				}
-				if ( ! standartSorgulama( $tc ) ) {
+				if ( ! standart_sorgulama( $tc ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_tc' ) );
 				}
 			}
@@ -80,7 +84,7 @@ class KK_ContactForm_Seven {
 		return $result;
 	}
 
-	public function hataMesajlari( $messages ) {
+	public function hata_mesajlari( $messages ) {
 		$messages = array_merge(
 			$messages,
 			array(
@@ -124,7 +128,7 @@ class KK_ContactForm_Seven {
 		);
 		return $messages;
 	}
-	public function tagOlustur( $tag ) {
+	public function tag_olustur( $tag ) {
 		if ( empty( $tag->name ) ) {
 			return '';
 		}
@@ -168,42 +172,42 @@ class KK_ContactForm_Seven {
 		$atts = wpcf7_format_atts( $atts );
 
 		foreach ( $tag['options'] as $item ) {
-			if ( $item == 'nvi' ) {
+			if ( 'nvi' === $item ) {
 				$hasnvi = true;
 			}
 		}
 
-		$tagValide = $tag->is_required();
+		$tag_valide = $tag->is_required();
 
-		if ( $hasnvi && $tagValide ) {
+		if ( $hasnvi && $tag_valide ) {
 			$html = sprintf(
 				'<label>Ad (required)</label><br>
-                    <span class="wpcf7-form-control-wrap"><input type="text" name="nameoftc" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap"><input type="text" name="name_of_t_c" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Soyad (required)</label><br>
-                    <span class="wpcf7-form-control-wrap "><input type="text" name="surnameoftc" value="" size="40" class="wpcf7-form-control wpcf7-surnameoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap "><input type="text" name="surname_of_t_c" value="" size="40" class="wpcf7-form-control wpcf7-surname_of_t_c wpcf7-surname_of_t_c wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Doğum Yılı (required)</label><br>
-                    <span class="wpcf7-form-control-wrap "><input type="text"  maxlength="4" name="yearoftc" value="" size="40"  class="wpcf7-form-control wpcf7-yearoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap "><input type="text"  maxlength="4" name="year_of_t_c" value="" size="40"  class="wpcf7-form-control wpcf7-year_of_t_c wpcf7-surname_of_t_c wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Tc Kimlik Numarası(required)</label><br>
                     <span class="wpcf7-form-control-wrap %1$s"><input %2$s />%3$s</span><br>',
 				sanitize_html_class( $tag->name ),
 				$atts,
 				$validation_error
 			);
-		} elseif ( $hasnvi && ! $tagValide ) {
+		} elseif ( $hasnvi && ! $tag_valide ) {
 			$html = sprintf(
 				'<label>Ad</label><br>
-                    <span class="wpcf7-form-control-wrap"><input type="text" name="nameoftc" value="" size="40" class="wpcf7-form-control  wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap"><input type="text" name="name_of_t_c" value="" size="40" class="wpcf7-form-control  wpcf7-text wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Soyad</label><br>
-                    <span class="wpcf7-form-control-wrap "><input type="text" name="surnameoftc" value="" size="40" class="wpcf7-form-control wpcf7-surnameoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap "><input type="text" name="surname_of_t_c" value="" size="40" class="wpcf7-form-control wpcf7-surname_of_t_c wpcf7-surname_of_t_c wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Doğum Yılı</label><br>
-                    <span class="wpcf7-form-control-wrap "><input type="text" maxlength="4" name="yearoftc" value="" size="40"  class="wpcf7-form-control wpcf7-yearoftc wpcf7-surnameoftc wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
+                    <span class="wpcf7-form-control-wrap "><input type="text" maxlength="4" name="year_of_t_c" value="" size="40"  class="wpcf7-form-control wpcf7-year_of_t_c wpcf7-surname_of_t_c wpcf7-validates-as-required" aria-required="true" aria-invalid="false"></span><br>
                     <label> Tc Kimlik Numarası</label><br>
                     <span class="wpcf7-form-control-wrap %1$s"><input %2$s />%3$s</span><br>',
 				sanitize_html_class( $tag->name ),
 				$atts,
 				$validation_error
 			);
-		} elseif ( ! $tag['options'] && $tagValide ) {
+		} elseif ( ! $tag['options'] && $tag_valide ) {
 			$html = sprintf(
 				'<label>Tc Kimlik Numarası(required)</label><br>
                     <span class="wpcf7-form-control-wrap %1$s"><input %2$s />%3$s</span>',
@@ -223,36 +227,36 @@ class KK_ContactForm_Seven {
 		return $html;
 	}
 
-	public function semayaEkle() {
+	public function sermaye_ekle() {
 		$tag_generator = WPCF7_TagGenerator::get_instance();
 		$tag_generator->add(
-			'tckimliknvi',
-			__( 'tckimlik nvi', 'kolay-kimlik' ),
-			array( $this, 'nviSemaOlustur' )
+			'tc_kimliknvi',
+			__( 'tc_kimlik nvi', 'kolay-kimlik' ),
+			array( $this, 'nvi_sema_olustur' )
 		);
 		$tag_generator->add(
-			'tckimlik',
-			__( 'tckimlik', 'kolay-kimlik' ),
-			array( $this, 'SemaOlustur' )
+			'tc_kimlik',
+			__( 'tc_kimlik', 'kolay-kimlik' ),
+			array( $this, 'sema_olustur' )
 		);
 	}
 
-	public function nviSemaOlustur( $args = '' ) {
+	public function nvi_sema_olustur( $args = '' ) {
 		$args = wp_parse_args( $args, array() );
 		$type = $args['id'];
 
 		if ( ! in_array( $type, array( 'email', 'url', 'tel' ) ) ) {
-			$type = 'tckimlik';
+			$type = 'tc_kimlik';
 		}
 
-		if ( 'tckimlik' == $type ) {
+		if ( 'tc_kimlik' === $type ) {
 			$description = __( 'Bu etiket iletişim formunuza Ad,Soyad,Doğum Yılı ve Tc Kimlik girişi yapılabilecek alanlar ekler. (Uyumluluğu kontrol eder, uyumsuz bilgi girişini engeller. ', 'kolay-kimlik' );
 		}
 
 		$desc_link = wpcf7_link( __( 'https://contactform7.com/text-fields/', 'contact-form-7' ), __( 'Text fields', 'contact-form-7' ) ); ?>
 		<div class="control-box">
 			<fieldset>
-				<legend><?php echo sprintf( esc_html( $description ), $desc_link ); ?></legend>
+				<legend><?php echo esc_html( $description, $desc_link ); ?></legend>
 
 				<table class="form-table">
 					<tbody>
@@ -278,17 +282,17 @@ class KK_ContactForm_Seven {
 									<fieldset>
 										<legend class="screen-reader-text"><?php echo esc_html( __( 'Akismet', 'contact-form-7' ) ); ?></legend>
 
-										<?php if ( 'text' == $type ) : ?>
+										<?php if ( 'text' === $type ) : ?>
 											<label>
 												<input type="checkbox" name="akismet:author" class="option" />
 												<?php echo esc_html( __( "This field requires author's name", 'contact-form-7' ) ); ?>
 											</label>
-										<?php elseif ( 'email' == $type ) : ?>
+										<?php elseif ( 'email' === $type ) : ?>
 											<label>
 												<input type="checkbox" name="akismet:author_email" class="option" />
 												<?php echo esc_html( __( "This field requires author's email address", 'contact-form-7' ) ); ?>
 											</label>
-										<?php elseif ( 'url' == $type ) : ?>
+										<?php elseif ( 'url' === $type ) : ?>
 											<label>
 												<input type="checkbox" name="akismet:author_url" class="option" />
 												<?php echo esc_html( __( "This field requires author's URL", 'contact-form-7' ) ); ?>
@@ -305,7 +309,7 @@ class KK_ContactForm_Seven {
 		</div>
 
 		<div class="insert-box">
-			<input type="text" name="<?php echo $type; ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
+			<input type="text" name="<?php esc_attr_e( $type ); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
 
 			<div class="submitbox">
 				<input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'contact-form-7' ) ); ?>" />
@@ -313,20 +317,20 @@ class KK_ContactForm_Seven {
 
 			<br class="clear" />
 
-			<p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>"><?php echo sprintf( esc_html( __( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.', 'contact-form-7' ) ), '<strong><span class="mail-tag"></span></strong>' ); ?><input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
+			<p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>"><?php echo sprintf( esc_html_e( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.', 'contact-form-7' ) ), esc_html_e( '<strong><span class="mail-tag"></span></strong>' ); ?><input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
 		</div>
 		<?php
 	}
 
-	public function SemaOlustur( $args = '' ) {
+	public function sema_olustur( $args = '' ) {
 		$args = wp_parse_args( $args, array() );
 		$type = $args['id'];
 
 		if ( ! in_array( $type, array( 'email', 'url', 'tel' ) ) ) {
-			$type = 'tckimlik';
+			$type = 'tc_kimlik';
 		}
 
-		if ( 'tckimlik' == $type ) {
+		if ( 'tc_kimlik' === $type ) {
 			$description = __( 'Bu etiket iletişim formunuza  Tc Kimlik girişi yapılabilecek alan ekler. (Girişin TC Kimlik No formatına uyumluluğunu kontrol eder, tutarsız rakam girişini engeller.) ', 'contact-form-7' );
 		}
 
@@ -360,17 +364,17 @@ class KK_ContactForm_Seven {
 									<fieldset>
 										<legend class="screen-reader-text"><?php echo esc_html( __( 'Akismet', 'contact-form-7' ) ); ?></legend>
 
-										<?php if ( 'text' == $type ) : ?>
+										<?php if ( 'text' === $type ) : ?>
 											<label>
 												<input type="checkbox" name="akismet:author" class="option" />
 												<?php echo esc_html( __( "This field requires author's name", 'contact-form-7' ) ); ?>
 											</label>
-										<?php elseif ( 'email' == $type ) : ?>
+										<?php elseif ( 'email' === $type ) : ?>
 											<label>
 												<input type="checkbox" name="akismet:author_email" class="option" />
 												<?php echo esc_html( __( "This field requires author's email address", 'contact-form-7' ) ); ?>
 											</label>
-										<?php elseif ( 'url' == $type ) : ?>
+										<?php elseif ( 'url' === $type ) : ?>
 											<label>
 												<input type="checkbox" name="akismet:author_url" class="option" />
 												<?php echo esc_html( __( "This field requires author's URL", 'contact-form-7' ) ); ?>
@@ -387,7 +391,7 @@ class KK_ContactForm_Seven {
 		</div>
 
 		<div class="insert-box">
-			<input type="text" name="<?php echo $type; ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
+			<input type="text" name="<?php _e( $type ); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
 
 			<div class="submitbox">
 				<input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'contact-form-7' ) ); ?>" />

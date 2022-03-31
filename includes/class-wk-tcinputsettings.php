@@ -123,7 +123,7 @@ class Wk_TcInputSettings {
 		?>
 		<p class="description">
 		<?php
-			esc_attr_e( 'Bu özellik ile contact form eklentinize tckimlik,tckimlik nvi etiketleri eklenecektir.Bu etiketler ile formlarınıza tc kimlik sorgulama alanları ekleyebilirsiniz.', 'kolay-kimlik' );
+			esc_attr_e( 'Bu özellik ile contact form eklentinize tc_kimlik,tc_kimlik nvi etiketleri eklenecektir.Bu etiketler ile formlarınıza tc kimlik sorgulama alanları ekleyebilirsiniz.', 'kolay-kimlik' );
 		?>
 		<br/>
 		<?php

@@ -15,13 +15,13 @@ class WkWooCheckOut {
 
 	public function siparis_fatura_bilgileri( $siparis ) {
 		$musteri = $siparis->get_customer_id();
-		echo '<div class="address"><p><strong>TC Kimlik No:</strong> ' . esc_html( get_user_meta( $musteri, 'billing_tckimlik', true ) ) . '</p>';
+		echo '<div class="address"><p><strong>TC Kimlik No:</strong> ' . esc_html( get_user_meta( $musteri, 'billing_tc_kimlik', true ) ) . '</p>';
 		echo '<p><strong>Vergi Dairesi:</strong> ' . esc_html( get_user_meta( $musteri, 'billing_vergiDairesi', true ) ) . '</p>';
 		echo '<p><strong>Vergi No:</strong> ' . esc_html( get_user_meta( $musteri, 'billing_vergiNo', true ) ) . '</p></div>';
 	}
 	public function yeni_alan_ekle( $alanlar ) {
 		if ( 'none' !== $this->tc_settings['woocommerce'] ) {
-			$alanlar['billing']['billing_tckimlik'] = array(
+			$alanlar['billing']['billing_tc_kimlik'] = array(
 				'type'        => 'text',
 				'required'    => ( 'on' === $this->tc_settings['woocommerceRequired'] ? true : false ),
 				'class'       => ( 'standart' === $this->tc_settings['woocommerce'] ? array( 'my-field-class form-row-wide' ) : array( 'my-field-class form-row-first' ) ),
@@ -69,7 +69,7 @@ class WkWooCheckOut {
 
 		if ( 'standart' === $this->tc_settings['woocommerce'] && 'on' === $this->tc_settings['woocommerceRequired'] ) {
 			$data = array(
-				'tcno' => sanitize_text_field( $_POST['billing_tckimlik'] ),
+				'tcno' => sanitize_text_field( $_POST['billing_tc_kimlik'] ),
 			);
 
 			if ( empty( $data['tcno'] ) ) {
@@ -80,13 +80,13 @@ class WkWooCheckOut {
 				$custom_error = __( '<strong>Fatura TC Kimlik Numarasi</strong> sadece rakam içerebilir.', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}
-			if ( ! standartSorgulama( $data['tcno'] ) && ! empty( $data['tcno'] ) ) {
+			if ( ! standart_sorgulama( $data['tcno'] ) && ! empty( $data['tcno'] ) ) {
 				$custom_error = __( '<strong>Fatura TC Kimlik Numarasi</strong> uyumsuz formattadir.', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}
 		} elseif ( 'nvi' === $this->tc_settings['woocommerce'] && 'on' === $this->tc_settings['woocommerceRequired'] ) {
 			$data = array(
-				'tcno'      => sanitize_text_field( $_POST['billing_tckimlik'] ),
+				'tcno'      => sanitize_text_field( $_POST['billing_tc_kimlik'] ),
 				'isim'      => sanitize_text_field( $_POST['billing_first_name'] ),
 				'soyisim'   => sanitize_text_field( $_POST['billing_last_name'] ),
 				'dogumyili' => sanitize_text_field( $_POST['billing_dogumYili'] ),
@@ -103,7 +103,7 @@ class WkWooCheckOut {
 				$custom_error = __( '<strong>Fatura  TC Kimlik Numarasi ve Doğum Yılı</strong> sadece rakam içerebilir.', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}
-			if ( nviSorgulama( $data ) === false ) {
+			if ( nvi_sorgulama( $data ) === false ) {
 				$custom_error = __( '<strong> Fatura Kimlik Bilgileri Uyumsuz!</strong>', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}
@@ -131,7 +131,7 @@ class WkWooCheckOut {
 				$hata_mesaji = __( '<strong>Fatura Vergi No</strong> 10 haneli olmalıdır.', 'kolay-kimlik' );
 				$errors->add( 'validation', $hata_mesaji );
 			}
-			if ( vergiKontrol( $data['vergino'] ) ) {
+			if ( vergi_kontrol( $data['vergino'] ) ) {
 				$custom_error = __( '<strong>Vergi Numarası</strong> geçersizdir.', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}

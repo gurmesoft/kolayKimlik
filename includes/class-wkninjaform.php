@@ -3,16 +3,16 @@ require_once( 'functions-kontrol.php' );
 class WkNinjaForm {
 
 	public function __construct() {
-		add_filter( 'ninja_forms_submit_data', array( $this, 'bilgiKontrolNinjaForm' ), 10, 2 );
+		add_filter( 'ninja_forms_submit_data', array( $this, 'bilgi_kontrol_ninja_form' ), 10, 2 );
 	}
 
-	public function bilgiKontrolNinjaForm( $form_data ) {
+	public function bilgi_kontrol_ninja_form( $form_data ) {
 
 		foreach ( $form_data['fields'] as $field ) {
 
-			if ( 'tc-no' == $field['key'] ) {
+			if ( 'tc-no' === $field['key'] ) {
 				$tc = $field['value'];
-				if ( ! standartSorgulama( $tc ) ) {
+				if ( ! standart_sorgulama( $tc ) ) {
 
 					$errors = array(
 						'fields' => array(
