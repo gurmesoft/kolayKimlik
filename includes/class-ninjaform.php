@@ -1,36 +1,34 @@
 <?php
-require_once('functions-kontrol.php');
-class WkNinjaForm
-{
-    public function __construct()
-    {
-        add_filter('ninja_forms_submit_data', array($this, 'bilgiKontrolNinjaForm'), 10, 2);
-    }
+require_once( 'functions-kontrol.php' );
+class WkNinjaForm {
 
-    public function bilgiKontrolNinjaForm($form_data)
-    {
+	public function __construct() {
+		add_filter( 'ninja_forms_submit_data', array( $this, 'bilgiKontrolNinjaForm' ), 10, 2 );
+	}
 
-        foreach ($form_data['fields'] as $field) {
+	public function bilgiKontrolNinjaForm( $form_data ) {
 
-            if ('tc-no' == $field['key']) {
-                $tc = $field['value'];
-                if (!standartSorgulama($tc)) {
+		foreach ( $form_data['fields'] as $field ) {
 
-                    $errors = [
-                        'fields' => [
-                            'tc-no' => __('Hatalı Tc No Formatı', 'kolay-kimlik'),
-                        ]
-                    ];
+			if ( 'tc-no' == $field['key'] ) {
+				$tc = $field['value'];
+				if ( ! standartSorgulama( $tc ) ) {
 
-                    $response = [
-                        'errors' => $errors,
-                    ];
+					$errors = array(
+						'fields' => array(
+							'tc-no' => __( 'Hatalı Tc No Formatı', 'kolay-kimlik' ),
+						),
+					);
 
-                    echo wp_json_encode($response);
-                }
-            }
-        }
+					$response = array(
+						'errors' => $errors,
+					);
 
-        return $form_data;
-    }
+					echo wp_json_encode( $response );
+				}
+			}
+		}
+
+		return $form_data;
+	}
 }
