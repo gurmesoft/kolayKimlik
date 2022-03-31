@@ -4,7 +4,6 @@ class WkNinjaForm
 {
     public function __construct()
     {
-
         add_filter('ninja_forms_submit_data', array($this, 'bilgiKontrolNinjaForm'), 10, 2);
     }
 

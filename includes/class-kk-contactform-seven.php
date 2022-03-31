@@ -2,7 +2,6 @@
 require_once( 'functions-kontrol.php' );
 
 class KK_ContactForm_Seven {
-
 	public function __construct() {
 		add_action( 'wpcf7_init', array( $this, 'tagEkleTcKimlik' ) );
 		add_filter( 'wpcf7_validate_tckimlik*', array( $this, 'bilgiKontrolCF7' ), 10, 2 );

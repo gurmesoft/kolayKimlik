@@ -19,14 +19,14 @@ msgstr ""
 msgid "Ad Bilgisi Eksik Bırakılamaz."
 msgstr ""
 
-#: includes/settings-kolaykimlik.php:81
+#: includes/class-wk-tcinputsettings.php:81
 msgid ""
 "Bu eklenti ile sitenizde kullandığınız iletişim formu eklentilerine, ödeme "
 "sayfalarına TC kimlik numarası alanı ekleyebilir.Girilen bilgilerin "
 "doğruluğunu kontrol edebilirsiniz."
 msgstr ""
 
-#: includes/settings-kolaykimlik.php:134 includes/settings-kolaykimlik.php:138
+#: includes/class-wk-tcinputsettings.php:134 includes/class-wk-tcinputsettings.php:138
 msgid "Bu seçenek çok yakında aktif edilecektir."
 msgstr ""
 
@@ -34,7 +34,7 @@ msgstr ""
 msgid "Doğum Yılı"
 msgstr ""
 
-#: includes/settings-kolaykimlik.php:100
+#: includes/class-wk-tcinputsettings.php:100
 msgid "Format Kontrol"
 msgstr ""
 
@@ -62,7 +62,7 @@ msgstr ""
 msgid "https://www.gurmewoo.com/"
 msgstr ""
 
-#: includes/settings-kolaykimlik.php:99
+#: includes/class-wk-tcinputsettings.php:99
 msgid "Kapalı"
 msgstr ""
 
@@ -70,11 +70,11 @@ msgstr ""
 msgid "kolayKimlik"
 msgstr ""
 
-#: includes/settings-kolaykimlik.php:86
+#: includes/class-wk-tcinputsettings.php:86
 msgid "Nasıl Kullanırım ?"
 msgstr "How to Use?"
 
-#: includes/settings-kolaykimlik.php:101
+#: includes/class-wk-tcinputsettings.php:101
 msgid "NVI Kontrol"
 msgstr ""
 
