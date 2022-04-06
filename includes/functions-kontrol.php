@@ -1,7 +1,7 @@
 <?php
 
 function nvi_sorgulama( $data ) {
-	$xml = '<?xml version="1.0" encoding="utf-8"?>
+	$xml      = '<?xml version="1.0" encoding="utf-8"?>
 			<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
 			<soap:Body>
 			<tc_kimlikNoDogrula xmlns="http://tckimlik.nvi.gov.tr/WS">
@@ -12,20 +12,20 @@ function nvi_sorgulama( $data ) {
 			</tc_kimlikNoDogrula>
 			</soap:Body>
 			</soap:Envelope>';
-	$args = array(
-		'method' 	  => 'POST',
+	$args     = array(
+		'method'      => 'POST',
 		'timeout'     => 45,
 		'redirection' => 5,
 		'httpversion' => '1.0',
 		'headers'     => array(
 			'Content-Type' => 'text/xml',
 		),
-		'body'       => $xml,
-		'sslverify'  => false,
+		'body'        => $xml,
+		'sslverify'   => false,
 	);
 	$response = wp_remote_post( 'https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx', $args );
 
-	return strip_tags( wp_remote_retrieve_body( $response ) );
+	return wp_strip_all_tags( wp_remote_retrieve_body( $response ) );
 }
 
 function standart_sorgulama( $tc_kimlik ) {
@@ -36,7 +36,7 @@ function standart_sorgulama( $tc_kimlik ) {
 		}
 	}
 
-	if ( 0 === $tc_kimlik[0] || ! ctype_digit( $tc_kimlik ) || 11 !== strlen( $tc_kimlik )  ) {
+	if ( 0 === $tc_kimlik[0] || ! ctype_digit( $tc_kimlik ) || 11 !== strlen( $tc_kimlik ) ) {
 		return false;
 	} else {
 		$ilkt = null;
@@ -71,7 +71,7 @@ function vergi_kontrol( $tax_number ) {
 		$tmp1 = ( $tax_number[ $i ] + ( 9 - $i ) ) % 10;
 		$tmp2 = ( $tmp1 * ( 2 ** ( 9 - $i ) ) ) % 9;
 
-		if ( $tmp1 !== 0 && $tmp2 === 0 ) {
+		if ( 0 !== $tmp1 && 0 === $tmp2 ) {
 			$tmp2 = 9;
 		}
 

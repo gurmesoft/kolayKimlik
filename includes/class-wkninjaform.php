@@ -1,5 +1,5 @@
 <?php
-require_once( 'functions-kontrol.php' );
+require_once 'functions-kontrol.php';
 class WkNinjaForm {
 
 	public function __construct() {

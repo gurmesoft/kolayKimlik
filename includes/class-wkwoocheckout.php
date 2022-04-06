@@ -51,6 +51,7 @@ class WkWooCheckOut {
 				'placeholder' => '',
 				'priority'    => 23,
 			);
+
 			$alanlar['billing']['billing_vergiNo'] = array(
 				'type'        => 'text',
 				'required'    => ( 'on' === $this->tc_settings['woocommerceRequiredVergi'] ? true : false ),
@@ -63,7 +64,7 @@ class WkWooCheckOut {
 		return $alanlar;
 	}
 	public function hata_ekle( $errors ) {
-		if ( ! wp_verify_nonce( $nonce, 'my-nonce' ) ) {
+		if ( ! wp_verify_nonce( 'my-nonce' ) ) {
 			die( 'Security check' );
 		}
 
@@ -104,7 +105,7 @@ class WkWooCheckOut {
 				$errors->add( 'validation', $custom_error );
 			}
 			if ( nvi_sorgulama( $data ) === false ) {
-				$custom_error = __( '<strong> Fatura Kimlik Bilgileri Uyumsuz!</strong>', 'kolay-kimlik' );
+				$custom_error = __( '<strong>Fatura Kimlik Bilgileri Uyumsuz!</strong>', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}
 		}

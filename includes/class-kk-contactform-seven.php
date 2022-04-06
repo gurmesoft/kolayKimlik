@@ -20,7 +20,7 @@ class KK_ContactForm_Seven {
 	}
 
 	public function bilgi_kontrol_c_f7( $result, $tag ) {
-		if ( ! wp_verify_nonce( $nonce, 'my-nonce' ) ) {
+		if ( ! wp_verify_nonce( 'my-nonce' ) ) {
 			die( 'Security check' );
 		}
 
@@ -68,7 +68,7 @@ class KK_ContactForm_Seven {
 			$name = $tag->name;
 			$tc = isset( $_POST[ $name ] ) ? sanitize_text_field( $_POST[ $name ] ) : '';
 
-			if ( 'tc_kimlik' == $tag->basetype ) {
+			if ( 'tc_kimlik' === $tag->basetype ) {
 				if ( $tag->is_required() && '' === $tc ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_required' ) );
 				}
@@ -88,40 +88,40 @@ class KK_ContactForm_Seven {
 		$messages = array_merge(
 			$messages,
 			array(
-				'invalid_tc' => array(
+				'invalid_tc'      => array(
 					'description' =>
 					__( 'Girilen değer, Tc Kimlik No formatında değildir.', 'kolay-kimlik' ),
-					'default' =>
+					'default'     =>
 					__( 'Girilen değer, Tc Kimlik No formatında değildir.', 'kolay-kimlik' ),
 				),
-				'invalid_name' => array(
+				'invalid_name'    => array(
 					'description' =>
 					__( 'Ad Bilgisi Eksik Bırakılamaz.', 'kolay-kimlik' ),
-					'default' =>
+					'default'     =>
 					__( 'Ad Bilgisi Eksik Bırakılamaz.', 'kolay-kimlik' ),
 				),
 				'invalid_surname' => array(
 					'description' =>
 					__( 'Soyad Bilgisi Eksik Bırakılamaz.', 'kolay-kimlik' ),
-					'default' =>
+					'default'     =>
 					__( 'Soyad Bilgisi Eksik Bırakılamaz.', 'kolay-kimlik' ),
 				),
-				'invalid_year' => array(
+				'invalid_year'    => array(
 					'description' =>
 					__( 'Yıl Bilgisi Eksik Bırakılamaz.', 'kolay-kimlik' ),
-					'default' =>
+					'default'     =>
 					__( 'Yıl Bilgisi Eksik Bırakılamaz.', 'kolay-kimlik' ),
 				),
-				'invalid_data' => array(
+				'invalid_data'    => array(
 					'description' =>
 					__( 'Girilen Bilgiler Uyumsuz.', 'kolay-kimlik' ),
-					'default' =>
+					'default'     =>
 					__( 'Girilen Bilgiler Uyumsuz.', 'kolay-kimlik' ),
 				),
-				'invalid_value' => array(
+				'invalid_value'   => array(
 					'description' =>
 					__( 'Yıl ve TC Kimlik Bilgileri Sadece Rakam İçerebilir.', 'kolay-kimlik' ),
-					'default' =>
+					'default'     =>
 					__( 'Yıl ve TC Kimlik Bilgileri Sadece Rakam İçerebilir.', 'kolay-kimlik' ),
 				),
 			)
@@ -134,7 +134,7 @@ class KK_ContactForm_Seven {
 		}
 
 		$validation_error = wpcf7_get_validation_error( $tag->name );
-		$class = wpcf7_form_controls_class( $tag->type, 'wpcf7-tc' );
+		$class            = wpcf7_form_controls_class( $tag->type, 'wpcf7-tc' );
 
 		if ( $validation_error ) {
 			$class .= ' wpcf7-not-valid';
@@ -142,13 +142,13 @@ class KK_ContactForm_Seven {
 
 		$atts = array();
 
-		$atts['size'] = 40;
+		$atts['size']      = 40;
 		$atts['maxlength'] = 11;
 		$atts['minlength'] = 11;
 
-		$atts['class'] = $tag->get_class_option( $class );
-		$atts['id'] = $tag->get_id_option();
-		$atts['tabindex'] = $tag->get_option( 'tabindex', 'signed_int', true );
+		$atts['class']       = $tag->get_class_option( $class );
+		$atts['id']          = $tag->get_id_option();
+		$atts['tabindex']    = $tag->get_option( 'tabindex', 'signed_int', true );
 		$atts['placeholder'] = '';
 
 		if ( $tag->is_required() ) {
@@ -309,7 +309,7 @@ class KK_ContactForm_Seven {
 		</div>
 
 		<div class="insert-box">
-			<input type="text" name="<?php esc_attr_e( $type ); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
+			<input type="text" name="<?php echo esc_attr( $type ); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
 
 			<div class="submitbox">
 				<input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'contact-form-7' ) ); ?>" />
@@ -317,7 +317,15 @@ class KK_ContactForm_Seven {
 
 			<br class="clear" />
 
-			<p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>"><?php echo sprintf( esc_html_e( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.', 'contact-form-7' ) ), esc_html_e( '<strong><span class="mail-tag"></span></strong>' ); ?><input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
+			<p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>">
+																   <?php
+																	sprintf(
+																		'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.',
+																		'contact-form-7',
+																		'<strong><span class="mail-tag"></span></strong>'
+																	);
+																	?>
+			<input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
 		</div>
 		<?php
 	}
@@ -338,7 +346,7 @@ class KK_ContactForm_Seven {
 		?>
 		<div class="control-box">
 			<fieldset>
-				<legend><?php echo sprintf( esc_html( $description ), $desc_link ); ?></legend>
+				<legend><?php echo esc_attr( $description, $desc_link ); ?></legend>
 
 				<table class="form-table">
 					<tbody>
@@ -391,7 +399,7 @@ class KK_ContactForm_Seven {
 		</div>
 
 		<div class="insert-box">
-			<input type="text" name="<?php _e( $type ); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
+			<input type="text" name="<?php esc_attr( $type ); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
 
 			<div class="submitbox">
 				<input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'contact-form-7' ) ); ?>" />
@@ -399,7 +407,7 @@ class KK_ContactForm_Seven {
 
 			<br class="clear" />
 
-			<p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>"><?php echo sprintf( esc_html( __( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.', 'contact-form-7' ) ), '<strong><span class="mail-tag"></span></strong>' ); ?><input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
+			<p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>"><?php echo sprintf( esc_attr( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.', 'contact-form-7' ), '<strong><span class="mail-tag"></span></strong>' ); ?><input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
 		</div>
 		<?php
 	}
