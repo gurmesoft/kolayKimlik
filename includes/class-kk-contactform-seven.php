@@ -317,6 +317,7 @@ class KK_ContactForm_Seven {
 
 			<br class="clear" />
 
+<<<<<<< HEAD
 			<p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>">
 																   <?php
 																	sprintf(
@@ -326,6 +327,9 @@ class KK_ContactForm_Seven {
 																	);
 																	?>
 			<input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
+=======
+			<p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>"><?php echo sprintf( esc_html_e( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag into the field on the Mail tab.', 'contact-form-7' ) ), esc_html_e( '<strong><span class="mail-tag"></span></strong>' ); ?><input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
+>>>>>>> 9f2c52b (r)
 		</div>
 		<?php
 	}
@@ -346,7 +350,11 @@ class KK_ContactForm_Seven {
 		?>
 		<div class="control-box">
 			<fieldset>
+<<<<<<< HEAD
 				<legend><?php echo esc_attr( $description, $desc_link ); ?></legend>
+=======
+				<legend><?php echo sprintf( esc_html( $description ), esc_html( $desc_link ) ); ?></legend>
+>>>>>>> 9f2c52b (r)
 
 				<table class="form-table">
 					<tbody>
@@ -399,7 +407,11 @@ class KK_ContactForm_Seven {
 		</div>
 
 		<div class="insert-box">
+<<<<<<< HEAD
 			<input type="text" name="<?php esc_attr( $type ); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
+=======
+			<input type="text" name="<?php echo esc_attr( $type ); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
+>>>>>>> 9f2c52b (r)
 
 			<div class="submitbox">
 				<input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'contact-form-7' ) ); ?>" />
