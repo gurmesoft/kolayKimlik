@@ -1,5 +1,5 @@
 <?php
-require_once( 'functions-kontrol.php' );
+require_once 'functions-kontrol.php';
 
 class WkWooCheckOut {
 	protected $tc_settigns;
@@ -105,7 +105,7 @@ class WkWooCheckOut {
 				$errors->add( 'validation', $custom_error );
 			}
 			if ( nvi_sorgulama( $data ) === false ) {
-				$custom_error = __( '<strong>Fatura Kimlik Bilgileri Uyumsuz!</strong>', 'kolay-kimlik' );
+				$custom_error = __( '<strong>Fatura Kimlik Bilgileri Uyumsuz! </strong>', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}
 		}

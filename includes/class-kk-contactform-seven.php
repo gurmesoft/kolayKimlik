@@ -1,5 +1,5 @@
 <?php
-require_once( 'functions-kontrol.php' );
+require_once 'functions-kontrol.php';
 
 class KK_ContactForm_Seven {
 	public function __construct() {
@@ -256,7 +256,7 @@ class KK_ContactForm_Seven {
 		$desc_link = wpcf7_link( __( 'https://contactform7.com/text-fields/', 'contact-form-7' ), __( 'Text fields', 'contact-form-7' ) ); ?>
 		<div class="control-box">
 			<fieldset>
-				<legend><?php echo esc_html( $description, $desc_link ); ?></legend>
+				<legend><?php echo esc_html( $description ); ?></legend>
 
 				<table class="form-table">
 					<tbody>
@@ -350,11 +350,7 @@ class KK_ContactForm_Seven {
 		?>
 		<div class="control-box">
 			<fieldset>
-<<<<<<< HEAD
-				<legend><?php echo esc_attr( $description, $desc_link ); ?></legend>
-=======
 				<legend><?php echo sprintf( esc_html( $description ), esc_html( $desc_link ) ); ?></legend>
->>>>>>> 9f2c52b (r)
 
 				<table class="form-table">
 					<tbody>
@@ -407,11 +403,7 @@ class KK_ContactForm_Seven {
 		</div>
 
 		<div class="insert-box">
-<<<<<<< HEAD
-			<input type="text" name="<?php esc_attr( $type ); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
-=======
 			<input type="text" name="<?php echo esc_attr( $type ); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
->>>>>>> 9f2c52b (r)
 
 			<div class="submitbox">
 				<input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'contact-form-7' ) ); ?>" />
@@ -419,7 +411,7 @@ class KK_ContactForm_Seven {
 
 			<br class="clear" />
 
-			<p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>"><?php echo sprintf( esc_attr( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.', 'contact-form-7' ), '<strong><span class="mail-tag"></span></strong>' ); ?><input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
+			<p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>"><?php echo sprintf( esc_attr( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.' ), '<strong><span class="mail-tag"></span></strong>' ); ?><input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
 		</div>
 		<?php
 	}
