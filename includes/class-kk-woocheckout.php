@@ -1,7 +1,7 @@
 <?php
 require_once 'functions-kontrol.php';
 
-class WkWooCheckOut {
+class KK_WooCheckOut {
 	protected $tc_settigns;
 
 	public function __construct() {
@@ -81,7 +81,7 @@ class WkWooCheckOut {
 				$custom_error = __( '<strong>Fatura TC Kimlik Numarasi</strong> sadece rakam içerebilir.', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}
-			if ( ! standart_sorgulama( $data['tcno'] ) && ! empty( $data['tcno'] ) ) {
+			if ( ! kk_standart_sorgulama( $data['tcno'] ) && ! empty( $data['tcno'] ) ) {
 				$custom_error = __( '<strong>Fatura TC Kimlik Numarasi</strong> uyumsuz formattadir.', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}
@@ -104,7 +104,7 @@ class WkWooCheckOut {
 				$custom_error = __( '<strong>Fatura  TC Kimlik Numarasi ve Doğum Yılı</strong> sadece rakam içerebilir.', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}
-			if ( nvi_sorgulama( $data ) === false ) {
+			if ( kk_nvi_sorgulama( $data ) === false ) {
 				$custom_error = __( '<strong>Fatura Kimlik Bilgileri Uyumsuz! </strong>', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}
@@ -132,7 +132,7 @@ class WkWooCheckOut {
 				$hata_mesaji = __( '<strong>Fatura Vergi No</strong> 10 haneli olmalıdır.', 'kolay-kimlik' );
 				$errors->add( 'validation', $hata_mesaji );
 			}
-			if ( vergi_kontrol( $data['vergino'] ) ) {
+			if ( kk_vergi_kontrol( $data['vergino'] ) ) {
 				$custom_error = __( '<strong>Vergi Numarası</strong> geçersizdir.', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}

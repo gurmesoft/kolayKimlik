@@ -1,6 +1,6 @@
 <?php
 
-function nvi_sorgulama( $data ) {
+function kk_nvi_sorgulama( $data ) {
 	$xml      = '<?xml version="1.0" encoding="utf-8"?>
 			<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
 			<soap:Body>
@@ -28,7 +28,7 @@ function nvi_sorgulama( $data ) {
 	return wp_strip_all_tags( wp_remote_retrieve_body( $response ) );
 }
 
-function standart_sorgulama( $tc_kimlik ) {
+function kk_standart_sorgulama( $tc_kimlik ) {
 	$engelli_nolar = array( '11111111110', '22222222220', '33333333330', '44444444440', '55555555550', '66666666660', '7777777770', '88888888880', '99999999990' );
 	foreach ( $engelli_nolar as $no ) {
 		if ( $tc_kimlik === $no ) {
@@ -60,7 +60,7 @@ function standart_sorgulama( $tc_kimlik ) {
 	}
 }
 
-function vergi_kontrol( $tax_number ) {
+function kk_vergi_kontrol( $tax_number ) {
 	if ( 10 !== strlen( $tax_number ) ) {
 		return false;
 	}

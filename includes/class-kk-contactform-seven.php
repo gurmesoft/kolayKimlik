@@ -45,7 +45,7 @@ class KK_ContactForm_Seven {
 				if ( $tag->is_required() && '' === $tc ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_required' ) );
 				}
-				if ( ! standart_sorgulama( $tc ) ) {
+				if ( ! kk_standart_sorgulama( $tc ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_tc' ) );
 				}
 				if ( empty( $name_of_t_c ) ) {
@@ -60,7 +60,7 @@ class KK_ContactForm_Seven {
 				if ( ! is_numeric( $tc ) || ! is_numeric( $year_of_t_c ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_value' ) );
 				}
-				if ( false === nvi_sorgulama( $data ) ) {
+				if ( false === kk_nvi_sorgulama( $data ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_data' ) );
 				}
 			}
@@ -75,7 +75,7 @@ class KK_ContactForm_Seven {
 				if ( ! is_numeric( $tc ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_value' ) );
 				}
-				if ( ! standart_sorgulama( $tc ) ) {
+				if ( ! kk_standart_sorgulama( $tc ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_tc' ) );
 				}
 			}

@@ -1,5 +1,5 @@
 <?php
-class Wk_TcInputSettings {
+class KK_TcInputSettings {
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'get_option_page' ) );

@@ -1,6 +1,6 @@
 <?php
 require_once 'functions-kontrol.php';
-class WkNinjaForm {
+class KK_NinjaForm {
 
 	public function __construct() {
 		add_filter( 'ninja_forms_submit_data', array( $this, 'bilgi_kontrol_ninja_form' ), 10, 2 );
@@ -12,7 +12,7 @@ class WkNinjaForm {
 
 			if ( 'tc-no' === $field['key'] ) {
 				$tc = $field['value'];
-				if ( ! standart_sorgulama( $tc ) ) {
+				if ( ! kk_standart_sorgulama( $tc ) ) {
 
 					$errors = array(
 						'fields' => array(

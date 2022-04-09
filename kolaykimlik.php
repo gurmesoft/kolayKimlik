@@ -3,7 +3,7 @@
  * Plugin Name: kolaykimlik
  * Plugin URI: https://www.gurmewoo.com/
  * Description: T.C kimlik onayı ve Vergi Numarası onayı ile kullanıcı kayıtları, ödeme işlemleri ve çeşitli form eklentileri (Contact Form, NinjaForms, WPForms) kullanarak özelleştirilmiş formlar oluşturmaları için geliştirilmiştir.
- * Version: 1.3.1
+ * Version: 1.3.2
  * Author: GurmeWoo.com
  * Author URI: https://www.gurmewoo.com
  * Plugin URI: https://gurmewoo.com/product/kolaykimlik-wordpress-woocommerce-kimlik-ve-vergi-numarasi-kontrol-eklentisi
@@ -12,10 +12,10 @@
  * WC tested up to: 5.6
  */
 
-require_once 'includes/class-wk-tcinputsettings.php';
+require_once 'includes/class-kk-tcinputsettings.php';
 require_once 'includes/class-kk-contactform-seven.php';
-require_once 'includes/class-wkninjaform.php';
-require_once 'includes/class-wkwoocheckout.php';
+require_once 'includes/class-kk-ninjaform.php';
+require_once 'includes/class-kk-wkwoocheckout.php';
 require __DIR__ . '/vendor/autoload.php';
 
 /**
@@ -23,7 +23,7 @@ require __DIR__ . '/vendor/autoload.php';
  *
  * @return void
  */
-function appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama() {
+function kk_appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama() {
 	if ( ! class_exists( 'Appsero\Client' ) ) {
 		require_once __DIR__ . '/appsero/src/Client.php';
 	}
@@ -37,11 +37,11 @@ function appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama
 	$client->updater();
 }
 
-appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama();
+kk_appsero_init_tracker_tc_kimlik_vergi_no_dogrulama_kolay_kimlik_dorulama();
 
 
-$settings_page = new Wk_TcInputSettings();
-$woo_checkout  = new WkWooCheckOut();
+$settings_page = new KK_TcInputSettings();
+$woo_checkout  = new KK_WooCheckOut();
 
 if ( class_exists( 'WPCF7' ) ) {
 	new KK_ContactForm_Seven();
