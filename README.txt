@@ -3,7 +3,7 @@ Contributors: ftpyz,gurmehub
 Tags: tc,vergino,kimlik
 Requires at least: 5.9
 Tested up to: 5.9
-Stable Tag: 1.3
+Stable Tag: 1.3.1
 Requires PHP: 8.0
 License: GPL
 
