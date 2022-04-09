@@ -109,12 +109,12 @@ class KK_TcInputSettings {
 		?>
 	</p>
 		<p>
-		<p> <img src="<?php echo esc_url( __DIR__ ); ?>assets/woocommerce.png" alt="WooCommerce"></p>
+		<p> <img src="<?php echo esc_url( plugin_dir_url( __DIR__ ) . 'assets/woocommerce.png' ); ?>" alt="WooCommerce"></p>
 		<input type='checkbox' id='woocommerceVergi' name='tc_settings[woocommerceVergi]' <?php echo 'on' === $this->tc_settings['woocommerceVergi'] ? 'checked' : ''; ?> />
 		<label for='tc_settings[woocommerceRequired]'> Vergi Dairesi/No Alanı Ekle </label></p>
 		<input type='checkbox' id='woocommerceRequiredVergiAlani' name='tc_settings[woocommerceRequiredVergi]' <?php echo 'on' === $this->tc_settings['woocommerceRequiredVergi'] ? 'checked' : ''; ?> />
 		<label for='tc_settings[woocommerceRequired]'>Zorunlu Alan Olarak Ekle </label></p>
-		<p> <img style="width: 400px; height: 60px;" src="<?php echo esc_url( __DIR__ ); ?>assets/woocommerceVergi.png" alt="WooCommerce"></p>
+		<p> <img style="width: 400px; height: 60px;" src="<?php echo esc_url( plugin_dir_url( __DIR__ ) . 'assets/woocommerceVergi.png' ); ?>" alt="WooCommerce"></p>
 		<hr>
 		<input type="submit" class="button button-primary" value="Ayarı Kaydet" />
 		<?php
@@ -134,7 +134,7 @@ class KK_TcInputSettings {
 			esc_attr_e( 'Her iki etiketide zorunlu kılma seçeneği formu düzenlediğiniz bölümde size sunulmuştur.', 'kolay-kimlik' );
 		?>
 		</p>
-		<p> <img src="<?php echo esc_url( __DIR__ ); ?>assets/contactform7.png" alt="WooCommerce"></p>
+		<p> <img src="<?php echo esc_url( plugin_dir_url( __DIR__ ) . 'assets/contactform7.png' ); ?>" alt="WooCommerce"></p>
 		<hr>
 		<?php
 	}

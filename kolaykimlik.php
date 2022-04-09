@@ -15,7 +15,7 @@
 require_once 'includes/class-kk-tcinputsettings.php';
 require_once 'includes/class-kk-contactform-seven.php';
 require_once 'includes/class-kk-ninjaform.php';
-require_once 'includes/class-kk-wkwoocheckout.php';
+require_once 'includes/class-kk-woocheckout.php';
 require __DIR__ . '/vendor/autoload.php';
 
 /**
