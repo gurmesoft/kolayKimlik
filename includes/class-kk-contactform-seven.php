@@ -316,8 +316,6 @@ class KK_ContactForm_Seven {
 			</div>
 
 			<br class="clear" />
-
-<<<<<<< HEAD
 			<p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>">
 																   <?php
 																	sprintf(
@@ -327,9 +325,7 @@ class KK_ContactForm_Seven {
 																	);
 																	?>
 			<input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
-=======
 			<p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>"><?php echo sprintf( esc_html_e( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag into the field on the Mail tab.', 'contact-form-7' ) ), esc_html_e( '<strong><span class="mail-tag"></span></strong>' ); ?><input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
->>>>>>> 9f2c52b (r)
 		</div>
 		<?php
 	}
