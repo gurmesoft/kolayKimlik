@@ -3,13 +3,14 @@
  * Plugin Name: kolaykimlik
  * Plugin URI: https://www.gurmewoo.com/
  * Description: T.C kimlik onayı ve Vergi Numarası onayı ile kullanıcı kayıtları, ödeme işlemleri ve çeşitli form eklentileri (Contact Form, NinjaForms, WPForms) kullanarak özelleştirilmiş formlar oluşturmaları için geliştirilmiştir.
- * Version: 1.3.4
+ * Version: 1.3.5
  * Author: GurmeWoo.com
  * Author URI: https://www.gurmewoo.com
  * Plugin URI: https://gurmewoo.com/product/kolaykimlik-wordpress-woocommerce-kimlik-ve-vergi-numarasi-kontrol-eklentisi
  * Text Domain: kolay-kimlik
  * WC requires at least: 4.9
  * WC tested up to: 5.6
+ * Requires PHP: 7.4
  */
 
 require_once 'includes/class-kk-tcinputsettings.php';

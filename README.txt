@@ -3,8 +3,8 @@ Contributors: ftpyz,gurmehub
 Tags: tc,vergino,kimlik
 Requires at least: 5.9
 Tested up to: 5.9
-Stable Tag: 1.3.4
-Requires PHP: 8.0
+Stable Tag: 1.3.5
+Requires PHP: 7.4
 License: GPL
 
 TC kimlik onayı ve Vergi Numarası onayı ile kullanıcı kayıtları, ödeme işlemleri ve çeşitli form eklentileri (Contact Form, NinjaForms, WPForms) kullanarak özelleştirilmiş formlar oluşturmaları için geliştirilmiştir.
