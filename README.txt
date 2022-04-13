@@ -22,6 +22,8 @@ Bunlara ek olarak sadece TC Kimlik numarasını matematiksel işlemler ile kontr
 * [Ninja Forms](https://tr.wordpress.org/plugins/ninja-forms/) eklentisi içerisinde özelleştirilmiş formlar oluştururken kullanılabilir.
 * [WPForms](https://tr.wordpress.org/plugins/wpforms-lite/) eklentisi içerisinde özelleştirilmiş formlar oluştururken kullanılabilir.
 
+[WooCommerce E-Fatura Eklentisi](https://gurmewoo.com/product/woocommerce-fatura-eklentisi/)
+
 == Frequently Asked Questions ==
 Bu Eklentiyi Kullanarak Fatura Kesmek İçin Gerekli Bilgileri Alabilir Miyim?
 
