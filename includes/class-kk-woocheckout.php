@@ -63,16 +63,12 @@ class KK_WooCheckOut {
 		}
 		return $alanlar;
 	}
-	public function hata_ekle( $errors ) {
-		if ( ! wp_verify_nonce( 'my-nonce' ) ) {
-			die( 'Security check' );
-		}
+	public function hata_ekle($fields, $errors ) {
 
 		if ( 'standart' === $this->tc_settings['woocommerce'] && 'on' === $this->tc_settings['woocommerceRequired'] ) {
 			$data = array(
 				'tcno' => sanitize_text_field( $_POST['billing_tc_kimlik'] ),
 			);
-
 			if ( empty( $data['tcno'] ) ) {
 				$custom_error = __( '<strong>Fatura TC Kimlik Numarasi</strong> gerekli bir alandır.', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
@@ -132,7 +128,7 @@ class KK_WooCheckOut {
 				$hata_mesaji = __( '<strong>Fatura Vergi No</strong> 10 haneli olmalıdır.', 'kolay-kimlik' );
 				$errors->add( 'validation', $hata_mesaji );
 			}
-			if ( kk_vergi_kontrol( $data['vergino'] ) ) {
+			if ( ! kk_vergi_kontrol( $data['vergino'] ) ) {
 				$custom_error = __( '<strong>Vergi Numarası</strong> geçersizdir.', 'kolay-kimlik' );
 				$errors->add( 'validation', $custom_error );
 			}

@@ -20,10 +20,6 @@ class KK_ContactForm_Seven {
 	}
 
 	public function bilgi_kontrol_c_f7( $result, $tag ) {
-		if ( ! wp_verify_nonce( 'my-nonce' ) ) {
-			die( 'Security check' );
-		}
-
 		foreach ( $tag['options'] as $item ) {
 			if ( 'nvi' === $item ) {
 				$hasnvi = true;
