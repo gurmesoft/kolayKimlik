@@ -42,7 +42,7 @@ class KK_WooCheckOut {
 			}
 		}
 
-		if ( 'on' === $this->tc_settings['woocommerceVergi'] ) {
+		if ( 'on' === @$this->tc_settings['woocommerceVergi'] ) {
 			$alanlar['billing']['billing_vergiDairesi'] = array(
 				'type'        => 'text',
 				'required'    => ( 'on' === $this->tc_settings['woocommerceRequiredVergi'] ? true : false ),

@@ -78,20 +78,20 @@ class KK_TcInputSettings {
 	}
 	public function woocommerce_enable() {
 		?>
-		<input type='checkbox' id='woocommerce' name='tc_settings[enabled]' <?php echo 'on' === $this->tc_settings['enabled'] ? 'checked' : ''; ?> />
+		<input type='checkbox' id='woocommerce' name='tc_settings[enabled]' <?php echo 'on' === @$this->tc_settings['enabled'] ? 'checked' : ''; ?> />
 		<?php
 	}
 	public function woocommerce_call_back() {
 		?>
 		<p>
 			<select name="tc_settings[woocommerce]" id="woocommerce">
-				<option value="none" <?php echo 'none' === $this->tc_settings['woocommerce'] ? 'selected' : ''; ?>><?php esc_attr_e( 'Kapalı', 'kolay-kimlik' ); ?></option>
-				<option value="standart" <?php echo 'standart' === $this->tc_settings['woocommerce'] ? 'selected' : ''; ?>><?php esc_attr_e( 'Format Kontrol', 'kolay-kimlik' ); ?></option>
-				<option value="nvi" <?php echo 'nvi' === $this->tc_settings['woocommerce'] ? 'selected' : ''; ?>><?php esc_attr_e( 'NVI Kontrol', 'kolay-kimlik' ); ?></option>
+				<option value="none" <?php echo 'none' === @$this->tc_settings['woocommerce'] ? 'selected' : ''; ?>><?php esc_attr_e( 'Kapalı', 'kolay-kimlik' ); ?></option>
+				<option value="standart" <?php echo 'standart' === @$this->tc_settings['woocommerce'] ? 'selected' : ''; ?>><?php esc_attr_e( 'Format Kontrol', 'kolay-kimlik' ); ?></option>
+				<option value="nvi" <?php echo 'nvi' === @$this->tc_settings['woocommerce'] ? 'selected' : ''; ?>><?php esc_attr_e( 'NVI Kontrol', 'kolay-kimlik' ); ?></option>
 			</select>
 		</p>
 		<p class="description">
-			<input type='checkbox' id='woocommerce' name='tc_settings[woocommerceRequired]' <?php echo 'on' === $this->tc_settings['woocommerceRequired'] ? 'checked' : ''; ?> />
+			<input type='checkbox' id='woocommerce' name='tc_settings[woocommerceRequired]' <?php echo 'on' === @$this->tc_settings['woocommerceRequired'] ? 'checked' : ''; ?> />
 			<label for='tc_settings[woocommerceRequired]'> Zorunlu Alan Olarak Ekle </label>
 		</p>
 		<p class="description">
@@ -110,9 +110,9 @@ class KK_TcInputSettings {
 	</p>
 		<p>
 		<p> <img src="<?php echo esc_url( plugin_dir_url( __DIR__ ) . 'assets/woocommerce.png' ); ?>" alt="WooCommerce"></p>
-		<input type='checkbox' id='woocommerceVergi' name='tc_settings[woocommerceVergi]' <?php echo 'on' === $this->tc_settings['woocommerceVergi'] ? 'checked' : ''; ?> />
+		<input type='checkbox' id='woocommerceVergi' name='tc_settings[woocommerceVergi]' <?php echo 'on' === @$this->tc_settings['woocommerceVergi'] ? 'checked' : ''; ?> />
 		<label for='tc_settings[woocommerceRequired]'> Vergi Dairesi/No Alanı Ekle </label></p>
-		<input type='checkbox' id='woocommerceRequiredVergiAlani' name='tc_settings[woocommerceRequiredVergi]' <?php echo 'on' === $this->tc_settings['woocommerceRequiredVergi'] ? 'checked' : ''; ?> />
+		<input type='checkbox' id='woocommerceRequiredVergiAlani' name='tc_settings[woocommerceRequiredVergi]' <?php echo 'on' === @$this->tc_settings['woocommerceRequiredVergi'] ? 'checked' : ''; ?> />
 		<label for='tc_settings[woocommerceRequired]'>Zorunlu Alan Olarak Ekle </label></p>
 		<p> <img style="width: 400px; height: 60px;" src="<?php echo esc_url( plugin_dir_url( __DIR__ ) . 'assets/woocommerceVergi.png' ); ?>" alt="WooCommerce"></p>
 		<hr>

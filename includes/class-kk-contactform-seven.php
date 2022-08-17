@@ -25,6 +25,7 @@ class KK_ContactForm_Seven {
 				$hasnvi = true;
 			}
 		}
+		
 		if ( $hasnvi ) {
 			$data              = array();
 			$name              = $tag->name;
@@ -56,6 +57,7 @@ class KK_ContactForm_Seven {
 				if ( ! is_numeric( $tc ) || ! is_numeric( $year_of_t_c ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_value' ) );
 				}
+			
 				if ( false === kk_nvi_sorgulama( $data ) ) {
 					$result->invalidate( $tag, wpcf7_get_message( 'invalid_data' ) );
 				}

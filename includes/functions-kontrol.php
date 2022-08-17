@@ -1,32 +1,43 @@
 <?php
 
+function strto($to, $str)
+{
+	if ('lower' === $to) {
+		return mb_strtolower(str_replace(array('I', 'Ğ', 'Ü', 'Ş', 'İ', 'Ö', 'Ç'), array('ı', 'ğ', 'ü', 'ş', 'i', 'ö', 'ç'), $str), 'utf-8');
+	} elseif ('upper' === $to) {
+		return mb_strtoupper(str_replace(array('ı', 'ğ', 'ü', 'ş', 'i', 'ö', 'ç'), array('I', 'Ğ', 'Ü', 'Ş', 'İ', 'Ö', 'Ç'), $str), 'utf-8');
+	} else {
+		trigger_error('Lütfen geçerli bir strto() parametresi giriniz.', E_USER_ERROR);
+	}
+}
+
 function kk_nvi_sorgulama($data)
 {
-	$xml      = '<?xml version="1.0" encoding="utf-8"?>
+	/*
+	$xml = '<?xml version="1.0" encoding="utf-8"?>
 			<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-			<soap:Body>
-			<tc_kimlikNoDogrula xmlns="http://tckimlik.nvi.gov.tr/WS">
-			<tc_kimlikNo>' . $data['tcno'] . '</tc_ükimlikNo>
-			<Ad>' . $data['isim'] . '</Ad>
-			<Soyad>' . $data['soyisim'] . '</Soyad>
-			<DogumYili>' . $data['dogumyili'] . '</DogumYili>
-			</tc_kimlikNoDogrula>
-			</soap:Body>
+				<soap:Body>
+					<TCKimlikNoDogrula  xmlns="http://tckimlik.nvi.gov.tr/WS">
+						<TCKimlikNo>' . $data['tcno'] . '</TCKimlikNo>
+						<Ad>' . strto('upper', $data['isim']) . '</Ad>
+						<Soyad>' . strto('upper', $data['soyisim']) . '</Soyad>
+						<DogumYili>' . $data['dogumyili'] . '</DogumYili>
+					</TCKimlikNoDogrula >
+				</soap:Body>
 			</soap:Envelope>';
-	$args     = array(
-		'method'      => 'POST',
-		'timeout'     => 45,
-		'redirection' => 5,
-		'httpversion' => '1.0',
-		'headers'     => array(
-			'Content-Type' => 'text/xml',
-		),
-		'body'        => $xml,
-		'sslverify'   => false,
+	*/
+	$client = new SoapClient( 'https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx?WSDL' );
+	
+	$result = $client->TCKimlikNoDogrula(
+		array(
+			'TCKimlikNo' => $data['tcno'] ,
+			'Ad'         => strto('upper', $data['isim']),
+			'Soyad'      => strto('upper', $data['soyisim']),
+			'DogumYili'  => $data['dogumyili'],
+		)
 	);
-	$response = wp_remote_post('https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx', $args);
 
-	return wp_strip_all_tags(wp_remote_retrieve_body($response));
+	return $result->TCKimlikNoDogrulaResult;
 }
 
 function kk_standart_sorgulama($tc_kimlik)
